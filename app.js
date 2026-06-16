@@ -318,7 +318,10 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'b7', title: 'The Name of the Wind', author: 'Patrick Rothfuss', genre: 'fantasy', status: 'rented', shelf: 'F-2', cssClass: 'fantasy' },
     { id: 'b8', title: 'Gone Girl', author: 'Gillian Flynn', genre: 'drama', status: 'available', shelf: 'T-3', cssClass: 'thriller' },
     { id: 'b9', title: 'Educated', author: 'Tara Westover', genre: 'nonfiction', status: 'available', shelf: 'N-1', cssClass: 'nonfiction' },
-    { id: 'b10', title: 'Attack on Titan Vol. 1', author: 'Hajime Isayama', genre: 'manga', status: 'rented', shelf: 'M-4', cssClass: 'manga' }
+    { id: 'b10', title: 'Attack on Titan Vol. 1', author: 'Hajime Isayama', genre: 'manga', status: 'rented', shelf: 'M-4', cssClass: 'manga' },
+    { id: 'b11', title: 'Dune', author: 'Frank Herbert', genre: 'scifi', status: 'available', shelf: 'S-1', cssClass: 'scifi' },
+    { id: 'b12', title: 'Neuromancer', author: 'William Gibson', genre: 'scifi', status: 'rented', shelf: 'S-3', cssClass: 'scifi' },
+    { id: 'b13', title: 'Foundation', author: 'Isaac Asimov', genre: 'scifi', status: 'available', shelf: 'S-2', cssClass: 'scifi' }
   ];
 
   // Make a working copy that we can modify status on
@@ -327,7 +330,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const getGenreLabel = (genre) => {
     switch (genre) {
       case 'classic': return 'Classic';
-      case 'fantasy': return 'Fantasy & Sci-Fi';
+      case 'fantasy': return 'Fantasy';
+      case 'scifi': return 'Sci-Fi';
       case 'drama': return 'Drama / Thriller';
       case 'nonfiction': return 'Nonfiction';
       case 'manga': return 'Manga';

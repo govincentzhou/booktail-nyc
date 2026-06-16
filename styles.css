@@ -789,6 +789,7 @@ textarea.form-control {
 }
 
 .book-card.fantasy::before { background-color: #7B1FA2; }
+.book-card.scifi::before { background-color: #00897B; }
 .book-card.classic::before { background-color: #388E3C; }
 .book-card.thriller::before { background-color: #D32F2F; }
 .book-card.nonfiction::before { background-color: #F57C00; }
