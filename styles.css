@@ -220,7 +220,10 @@ header {
   color: var(--color-primary);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+}
+
+.logo i {
+  margin-right: 0.5rem;
 }
 
 .logo span {
