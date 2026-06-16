@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservations & Menu | Booktail NYC</title>
+  <meta name="description" content="Book a cozy table at Booktail NYC, pre-order from our coffee and pastry menu, or browse and reserve books from our live inventory.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header id="main-header">
+    <nav class="navbar" id="main-navbar">
+      <a href="index.html" class="logo" id="nav-logo">
+        <i class="fa-solid fa-cat"></i> Book<span>tail</span>
+      </a>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-menu">
+        <li><a href="index.html" id="link-home">Home</a></li>
+        <li><a href="reserve.html" class="active" id="link-reserve">Reserve & Menu</a></li>
+        <li><a href="about.html" id="link-about">Meet the Cats</a></li>
+        <li><a href="contact.html" id="link-contact">Contact & Reviews</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="reserve-main">
+    
+    <!-- Reservation Section -->
+    <section class="reservation-section" id="booking-section">
+      <div class="reserve-layout" id="reserve-layout-container">
+        
+        <!-- Booking Info / Text -->
+        <div class="reserve-info" id="reserve-info-text">
+          <span class="highlight-badge">Cozy Sanctuary</span>
+          <h2>Reserve Your Reading Spot</h2>
+          <p>Due to the popular presence of our resident cats and limited cozy alcoves, we highly recommend making a reservation in advance. Settle in for a dedicated 2-hour window of uninterrupted reading, studying, or socializing.</p>
+          
+          <div class="contact-info-list" id="booking-policy-list">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-circle-info"></i></div>
+              <div>
+                <span class="contact-info-title">Reservation Fee</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">Table reservations are completely free. You only pay for food, drink, or books you rent.</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-paw"></i></div>
+              <div>
+                <span class="contact-info-title">Cat Lounge Experience</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">Optional cat lounge seating includes access to our primary play and cuddle zones. A $5/guest contribution goes directly to the rescue shelter for food and healthcare.</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <span class="contact-info-title">Grace Period</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">We hold tables for up to 15 minutes. Please let us know if you are running late!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reservation Card Form -->
+        <div class="reserve-card" id="booking-card-wrapper">
+          <form id="reservation-form">
+            <div class="form-group">
+              <label for="reserve-name">Full Name</label>
+              <input type="text" id="reserve-name" class="form-control" placeholder="E.g., Sarah Jenkins" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="reserve-email">Email Address</label>
+              <input type="email" id="reserve-email" class="form-control" placeholder="sarah@example.com" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group">
+                <label for="reserve-date">Date</label>
+                <input type="date" id="reserve-date" class="form-control" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="reserve-time">Time Slot</label>
+                <select id="reserve-time" class="form-control" required>
+                  <option value="" disabled selected>Select slot</option>
+                  <option value="09:00">9:00 AM - 11:00 AM</option>
+                  <option value="11:30">11:30 AM - 1:30 PM</option>
+                  <option value="14:00">2:00 PM - 4:00 PM</option>
+                  <option value="16:30">4:30 PM - 6:30 PM</option>
+                  <option value="18:30">6:30 PM - 8:30 PM</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reserve-guests">Number of Guests</label>
+              <select id="reserve-guests" class="form-control" required>
+                <option value="1">1 Person</option>
+                <option value="2" selected>2 People</option>
+                <option value="3">3 People</option>
+                <option value="4">4 People</option>
+                <option value="6">5 - 6 People</option>
+              </select>
+            </div>
+
+            <div class="form-group checkbox-group" style="margin: 2rem 0;">
+              <input type="checkbox" id="reserve-cats" name="cat_lounge_access">
+              <label for="reserve-cats" style="margin-bottom: 0; cursor: pointer;">
+                Add Feline Lounge Access (+$5 / person)
+              </label>
+            </div>
+
+            <div class="form-group">
+              <label for="reserve-notes">Special Requests / Dietary Restrictions</label>
+              <textarea id="reserve-notes" class="form-control" placeholder="Let us know if you prefer a window seat, need a high chair, or have allergies."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btn-submit-reservation" style="width: 100%;">
+              <i class="fa-solid fa-circle-check"></i> Book Reservation
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Cafe Menu & Pre-ordering Section -->
+    <section class="menu-section" id="menu">
+      <h2 class="center-header" id="menu-heading">The Booktail Cafe Menu</h2>
+      <p style="text-align: center; max-width: 600px; margin: 1rem auto 3rem;" id="menu-subheading">
+        Taste our specialty botanical lattes, artisanal pastries, and freshly toasted sandwiches. Pre-order below to have them ready at your table!
+      </p>
+
+      <!-- Tabs Navigation -->
+      <ul class="menu-tabs" id="menu-tabs-nav">
+        <li><button class="menu-tab-btn active" data-tab="coffee" id="tab-coffee">Coffee & Tea</button></li>
+        <li><button class="menu-tab-btn" data-tab="food" id="tab-food">Food & Sandwiches</button></li>
+        <li><button class="menu-tab-btn" data-tab="pastries" id="tab-pastries">Fresh Pastries</button></li>
+      </ul>
+
+      <!-- Tab Content + Cart Grid -->
+      <div class="menu-container" id="menu-container-box">
+        
+        <!-- Menu Panels (Left) -->
+        <div class="menu-panels" id="menu-panels-wrapper">
+          
+          <!-- Coffee Panel -->
+          <div class="menu-panel active" id="panel-coffee">
+            <div class="menu-grid">
+              
+              <div class="menu-item" data-id="c1">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Lavender Honey Latte</span>
+                  <span class="menu-item-price">$5.50</span>
+                </div>
+                <p class="menu-item-desc">Double espresso, steamed milk, organic lavender flowers, and a drizzle of local honeycomb.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="c1" data-name="Lavender Honey Latte" data-price="5.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="c2">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Feline Matcha Latte</span>
+                  <span class="menu-item-price">$5.75</span>
+                </div>
+                <p class="menu-item-desc">Ceremonial grade Japanese Uji matcha, vanilla syrup, oat milk, complete with adorable cat latte art.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="c2" data-name="Feline Matcha Latte" data-price="5.75">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="c3">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">House Pour-Over</span>
+                  <span class="menu-item-price">$4.50</span>
+                </div>
+                <p class="menu-item-desc">Freshly ground single-origin light roast, slowly dripped to bring out organic floral notes.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="c3" data-name="House Pour-Over" data-price="4.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="c4">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Chamomile Rose Tea</span>
+                  <span class="menu-item-price">$4.25</span>
+                </div>
+                <p class="menu-item-desc">Soothe your soul with whole chamomile buds, dried rose petals, and a touch of lemongrass.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="c4" data-name="Chamomile Rose Tea" data-price="4.25">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Food Panel -->
+          <div class="menu-panel" id="panel-food">
+            <div class="menu-grid">
+              
+              <div class="menu-item" data-id="f1">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Caprese Panini</span>
+                  <span class="menu-item-price">$9.50</span>
+                </div>
+                <p class="menu-item-desc">Thick slices of fresh mozzarella, heirloom tomatoes, house-made basil pesto, toasted on sourdough.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="f1" data-name="Caprese Panini" data-price="9.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="f2">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Smoked Salmon Bagel</span>
+                  <span class="menu-item-price">$10.50</span>
+                </div>
+                <p class="menu-item-desc">Toasted everything bagel with cream cheese, cold-smoked Atlantic salmon, capers, dill, and red onion.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="f2" data-name="Smoked Salmon Bagel" data-price="10.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="f3">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Avocado Hummus Toast</span>
+                  <span class="menu-item-price">$8.50</span>
+                </div>
+                <p class="menu-item-desc">Creamy avocado spread, garlic hummus, cherry tomatoes, radish slices, and a dash of red pepper flakes.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="f3" data-name="Avocado Hummus Toast" data-price="8.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Pastries Panel -->
+          <div class="menu-panel" id="panel-pastries">
+            <div class="menu-grid">
+              
+              <div class="menu-item" data-id="p1">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Cat Cinnamon Roll</span>
+                  <span class="menu-item-price">$4.50</span>
+                </div>
+                <p class="menu-item-desc">Soft, gooey brioche bun shaped with feline ears, heavily spiced with Saigon cinnamon and cream cheese glaze.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="p1" data-name="Cat Cinnamon Roll" data-price="4.50">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="p2">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Chocolate Croissant</span>
+                  <span class="menu-item-price">$4.00</span>
+                </div>
+                <p class="menu-item-desc">Flaky, buttery multi-layered French pastry stuffed with rich, dark Belgian chocolate chunks.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="p2" data-name="Chocolate Croissant" data-price="4.00">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+              <div class="menu-item" data-id="p3">
+                <div class="menu-item-header">
+                  <span class="menu-item-title">Almond Tea Cake</span>
+                  <span class="menu-item-price">$4.25</span>
+                </div>
+                <p class="menu-item-desc">A moist, tender slice of almond meal cake infused with citrus zest, topped with sliced toasted almonds.</p>
+                <button class="btn btn-gold btn-sm add-to-cart-btn" data-id="p3" data-name="Almond Tea Cake Slice" data-price="4.25">
+                  <i class="fa-solid fa-plus"></i> Add to Pre-order
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pre-order Cart Sidebar (Right) -->
+        <aside class="cart-card" id="menu-cart-sidebar">
+          <h3 class="cart-title">
+            <span><i class="fa-solid fa-cart-shopping"></i> Pre-Order Cart</span>
+            <span id="cart-count" style="font-size: 0.9rem; background: var(--accent-gold); color: var(--color-primary); padding: 0.2rem 0.6rem; border-radius: 50px;">0</span>
+          </h3>
+          
+          <div id="cart-content">
+            <ul class="cart-items" id="cart-items-list">
+              <!-- Dynamically populated via JS -->
+            </ul>
+
+            <div id="cart-summary-block">
+              <div class="cart-total-section">
+                <div class="cart-total-row">
+                  <span>Subtotal:</span>
+                  <span id="cart-total-price">$0.00</span>
+                </div>
+              </div>
+              <button class="btn btn-primary" id="btn-checkout-cart" style="width: 100%;" disabled>
+                <i class="fa-solid fa-credit-card"></i> Confirm Pre-Order
+              </button>
+              <p style="text-align: center; font-size: 0.75rem; margin-top: 0.8rem; margin-bottom: 0;">* Pay at the counter when you arrive</p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- Book Inventory & Search Section -->
+    <section class="books-section" id="inventory">
+      <h2 class="center-header" id="books-heading">Our Bookstore Inventory</h2>
+      <p style="text-align: center; max-width: 600px; margin: 1rem auto 3rem;" id="books-subheading">
+        Search our physical shelves. You can read any book in our space for free, or reserve a rental copy for pickup at the counter.
+      </p>
+
+      <!-- Search & Filters -->
+      <div class="search-bar-container" id="inventory-controls">
+        <input type="text" id="book-search-input" class="form-control search-bar" placeholder="Search by title, author, or keywords...">
+        <select id="book-genre-filter" class="form-control" style="max-width: 180px;">
+          <option value="all">All Genres</option>
+          <option value="classic">Classics</option>
+          <option value="fantasy">Fantasy & Sci-Fi</option>
+          <option value="drama">Dramas & Thrillers</option>
+          <option value="nonfiction">Nonfiction</option>
+          <option value="manga">Manga</option>
+        </select>
+      </div>
+
+      <!-- Books Grid -->
+      <div class="books-grid" id="books-grid-container">
+        <!-- Book items will be dynamically generated and filtered here -->
+      </div>
+    </section>
+
+    <!-- Success Confirmation Modal -->
+    <div class="modal-overlay" id="success-modal-overlay">
+      <div class="modal-box" id="success-modal-content">
+        <div class="modal-icon" id="success-modal-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h3 id="success-modal-heading">Booking Confirmed!</h3>
+        <p id="success-modal-message">We have received your details. A confirmation email has been sent to your address.</p>
+        <button class="btn btn-primary" id="success-modal-close-btn">Done</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-content" id="footer-sections">
+      <div class="footer-section" id="footer-about">
+        <h3><i class="fa-solid fa-cat"></i> Booktail</h3>
+        <p>NYC's hidden cozy cafe and cat bookstore. An sanctuary for coffee, cats, and stories tucked away in a peaceful alleyway.</p>
+        <div class="social-links" id="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section" id="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reserve.html">Reserve & Menu</a></li>
+          <li><a href="about.html">Meet the Cats</a></li>
+          <li><a href="contact.html">Contact & Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-contact">
+        <h3>Visit Us</h3>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> 14 Cat Alley, Greenwich Village<br>New York, NY 10012</li>
+          <li><i class="fa-solid fa-phone"></i> (212) 555-PAWS</li>
+          <li><i class="fa-solid fa-envelope"></i> hello@booktailnyc.com</li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-hours">
+        <h3>Hours</h3>
+        <ul>
+          <li><strong>Mon - Fri:</strong> 8:00 AM - 8:00 PM</li>
+          <li><strong>Sat - Sun:</strong> 9:00 AM - 9:00 PM</li>
+          <li><small>* Cat Lounge closed Mon morning for vet checkups</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-copyright">
+      <p>&copy; 2026 Booktail NYC. All rights reserved. Handcrafted with love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
