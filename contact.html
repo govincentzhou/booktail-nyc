@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Reviews | Booktail NYC</title>
+  <meta name="description" content="Get in touch with Booktail NYC for book signings, business inquiries, or general collaborations. Read customer reviews and submit your own feedback.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header id="main-header">
+    <nav class="navbar" id="main-navbar">
+      <a href="index.html" class="logo" id="nav-logo">
+        <i class="fa-solid fa-cat"></i> Book<span>tail</span>
+      </a>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-menu">
+        <li><a href="index.html" id="link-home">Home</a></li>
+        <li><a href="reserve.html" id="link-reserve">Reserve & Menu</a></li>
+        <li><a href="about.html" id="link-about">Meet the Cats</a></li>
+        <li><a href="contact.html" class="active" id="link-contact">Contact & Reviews</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contact-main">
+    
+    <!-- Contact/Business inquiries section -->
+    <section class="contact-inquiry-section" id="inquiries-section">
+      <div class="contact-layout" id="contact-layout-container">
+        
+        <!-- Contact details / Event description -->
+        <div class="contact-details-box" id="contact-details-text">
+          <span class="highlight-badge">Collaborations</span>
+          <h2>Connect With Booktail</h2>
+          <p>Whether you're an author seeking an intimate, foliage-lined space for your next book launch, a local business interested in collaboration, or a customer with a question—we'd love to hear from you.</p>
+          
+          <div class="contact-info-list" id="contact-channels">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-book-open"></i></div>
+              <div>
+                <span class="contact-info-title">Author Events & Signings</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">We host cozy, evening book signings, poetry readings, and literature club meetups for up to 35 guests.</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-handshake"></i></div>
+              <div>
+                <span class="contact-info-title">Business Partnerships</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">Get in touch regarding product integrations, rescue cat advocacy sponsorships, or cafe partnerships.</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <span class="contact-info-title">Direct Inquiries</span>
+                <p style="margin-bottom: 0; font-size: 0.9rem;">General questions: hello@booktailnyc.com<br>Press inquiries: media@booktailnyc.com</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Card -->
+        <div class="contact-card" id="contact-form-card">
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="contact-reason">Inquiry Type</label>
+              <select id="contact-reason" class="form-control" required>
+                <option value="" disabled selected>Select option</option>
+                <option value="signing">Host a Book Signing / Reading Event</option>
+                <option value="collab">Business Collaboration / Partnership</option>
+                <option value="general">General Customer Inquiry</option>
+                <option value="press">Press & Media Inquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-name">Your Name / Organization</label>
+              <input type="text" id="contact-name" class="form-control" placeholder="E.g., Margaret Atwood / Toronto Press" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email Address</label>
+              <input type="email" id="contact-email" class="form-control" placeholder="margaret@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Inquiry Details</label>
+              <textarea id="contact-message" class="form-control" placeholder="Please describe your proposal, preferred dates, or questions in detail." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="btn-submit-contact" style="width: 100%;">
+              <i class="fa-solid fa-paper-plane"></i> Send Inquiry
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section-wrapper" id="reviews-section">
+      <h2 class="center-header" id="reviews-heading">Customer Reviews</h2>
+      <p style="text-align: center; max-width: 600px; margin: 1rem auto 4rem;" id="reviews-subheading">
+        Read about our visitors' experiences or submit your own review. We value your feedback and use it to improve our oasis!
+      </p>
+
+      <div class="reviews-summary" id="reviews-summary-dashboard">
+        <div class="reviews-summary-large" id="avg-rating-value">4.9</div>
+        <div>
+          <div class="reviews-summary-stars" id="avg-stars-container">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="reviews-summary-count" id="total-reviews-count">Based on 3 reviews</div>
+        </div>
+      </div>
+
+      <div class="contact-layout" id="reviews-layout-grid">
+        
+        <!-- Submit Review Card -->
+        <div class="contact-card" id="submit-review-card">
+          <h3>Write a Review</h3>
+          <p style="font-size: 0.85rem; margin-bottom: 2rem;">Let us know how your coffee was, which cat you met, and how you enjoyed your books!</p>
+          
+          <form id="review-form">
+            <div class="form-group">
+              <label>Your Rating</label>
+              <div class="star-rating-container" id="star-rating-selector">
+                <i class="fa-solid fa-star star-rating-btn" data-value="1"></i>
+                <i class="fa-solid fa-star star-rating-btn" data-value="2"></i>
+                <i class="fa-solid fa-star star-rating-btn" data-value="3"></i>
+                <i class="fa-solid fa-star star-rating-btn" data-value="4"></i>
+                <i class="fa-solid fa-star star-rating-btn" data-value="5"></i>
+              </div>
+              <input type="hidden" id="review-rating" value="5" required>
+            </div>
+
+            <div class="form-group">
+              <label for="review-author-name">Your Name</label>
+              <input type="text" id="review-author-name" class="form-control" placeholder="E.g., Charlotte B." required>
+            </div>
+
+            <div class="form-group">
+              <label for="review-comment-text">Review / Feedback</label>
+              <textarea id="review-comment-text" class="form-control" placeholder="Share your Booktail experience..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold" id="btn-submit-review" style="width: 100%;">
+              <i class="fa-solid fa-pen-to-square"></i> Submit Review
+            </button>
+          </form>
+        </div>
+
+        <!-- Reviews Feed List -->
+        <div class="reviews-feed-container" id="reviews-feed-wrapper">
+          <div class="reviews-feed" id="reviews-feed">
+            <!-- Populated via Javascript -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Success Confirmation Modal -->
+    <div class="modal-overlay" id="success-modal-overlay">
+      <div class="modal-box" id="success-modal-content">
+        <div class="modal-icon" id="success-modal-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h3 id="success-modal-heading">Message Sent!</h3>
+        <p id="success-modal-message">We have received your details. A confirmation email has been sent to your address.</p>
+        <button class="btn btn-primary" id="success-modal-close-btn">Done</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-content" id="footer-sections">
+      <div class="footer-section" id="footer-about">
+        <h3><i class="fa-solid fa-cat"></i> Booktail</h3>
+        <p>NYC's hidden cozy cafe and cat bookstore. An sanctuary for coffee, cats, and stories tucked away in a peaceful alleyway.</p>
+        <div class="social-links" id="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section" id="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reserve.html">Reserve & Menu</a></li>
+          <li><a href="about.html">Meet the Cats</a></li>
+          <li><a href="contact.html">Contact & Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-contact">
+        <h3>Visit Us</h3>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> 14 Cat Alley, Greenwich Village<br>New York, NY 10012</li>
+          <li><i class="fa-solid fa-phone"></i> (212) 555-PAWS</li>
+          <li><i class="fa-solid fa-envelope"></i> hello@booktailnyc.com</li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-hours">
+        <h3>Hours</h3>
+        <ul>
+          <li><strong>Mon - Fri:</strong> 8:00 AM - 8:00 PM</li>
+          <li><strong>Sat - Sun:</strong> 9:00 AM - 9:00 PM</li>
+          <li><small>* Cat Lounge closed Mon morning for vet checkups</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-copyright">
+      <p>&copy; 2026 Booktail NYC. All rights reserved. Handcrafted with love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
