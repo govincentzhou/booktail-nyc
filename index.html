@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booktail | Cafe, Bookstore & Cat Lounge in NYC</title>
+  <meta name="description" content="Discover Booktail in NYC: A lush, overgrown cafe and bookstore featuring resident cats, cozy reading nooks, a koi pond, specialty drinks, and curated books.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome Icons for UI -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header id="main-header">
+    <nav class="navbar" id="main-navbar">
+      <a href="index.html" class="logo" id="nav-logo">
+        <i class="fa-solid fa-cat"></i> Book<span>tail</span>
+      </a>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-menu">
+        <li><a href="index.html" class="active" id="link-home">Home</a></li>
+        <li><a href="reserve.html" id="link-reserve">Reserve & Menu</a></li>
+        <li><a href="about.html" id="link-about">Meet the Cats</a></li>
+        <li><a href="contact.html" id="link-contact">Contact & Reviews</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home-main">
+    
+    <!-- Hero Banner Section -->
+    <section class="hero" id="home-hero">
+      <img src="images/cafe_hero.png" alt="Booktail cafe and bookstore lush overgrown interior" class="hero-img" id="hero-bg-img">
+      <div class="hero-content" id="hero-content-wrapper">
+        <span class="highlight-badge">Hidden Gem of NYC</span>
+        <h1>A Cozy Haven for Book, Cat & Coffee Lovers</h1>
+        <p>Tucked away in a quiet alley, Booktail opens up into a lush, overgrown sanctuary. Escape the hustle of the city, cross our koi pond footbridge, and find a cozy nook with a warm cup of coffee and a purring cat.</p>
+        <div class="hero-buttons" id="hero-actions">
+          <a href="reserve.html" class="btn btn-gold" id="hero-btn-reserve"><i class="fa-solid fa-calendar-days"></i> Book a Table</a>
+          <a href="reserve.html#menu" class="btn btn-secondary" id="hero-btn-menu" style="color: var(--bg-primary); border-color: var(--bg-primary);"><i class="fa-solid fa-mug-hot"></i> View Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- The Vibe / Experience Grid -->
+    <section class="vibe-showcase" id="vibe-showcase-section">
+      <h2 class="center-header" id="vibe-heading">The Booktail Experience</h2>
+      <p style="text-align: center; max-width: 600px; margin: 1rem auto 4rem;" id="vibe-subheading">
+        Take a virtual stroll through our space. Booktail is designed to be an organic, tranquil oasis where literature, cafe culture, and animal companionship meet.
+      </p>
+
+      <!-- Panel 1: Koi Pond & Ambient space -->
+      <div class="vibe-grid" id="vibe-panel-pond">
+        <div class="vibe-text">
+          <span class="highlight-badge">The Ambience</span>
+          <h3>A Lush, Overgrown Oasis</h3>
+          <p>Upon stepping through our alleyway entrance, you'll be greeted by a surprisingly expansive space filled with wood and stone detailing. Warm ambient light hangs from rafters wrapped in ivy, and at the center of it all is a tiny indoor koi pond spanned by a miniature wooden footbridge.</p>
+          <p>The gentle babbling of the water combined with soft acoustic tunes sets the ultimate relaxing backdrop for reading, studying, or socializing.</p>
+        </div>
+        <div class="vibe-img-container">
+          <img src="images/cafe_hero.png" alt="A tiny indoor koi pond with a wooden footbridge inside a lush cafe and bookstore">
+        </div>
+      </div>
+
+      <!-- Panel 2: Curated Books & Nooks -->
+      <div class="vibe-grid reverse" id="vibe-panel-books">
+        <div class="vibe-text">
+          <span class="highlight-badge">Our Bookstore</span>
+          <h3>Curated Shelves & Reading Nooks</h3>
+          <p>Books are placed decoratively yet functionally all around the cafe. We stock a wide, handpicked collection including literary classics, sci-fi & fantasy, thrillers, dramas, non-fiction, and manga.</p>
+          <p>Settle into any of our comfortable velvet armchairs and read any book in our inventory for free. If you find a story you can't put down, you can easily rent it at the counter or reserve it online to take home.</p>
+          <a href="reserve.html#inventory" class="btn btn-secondary btn-sm" id="btn-browse-inventory"><i class="fa-solid fa-book"></i> Search Book Inventory</a>
+        </div>
+        <div class="vibe-img-container">
+          <img src="images/cat2.jpg" alt="Resident black cat sitting on top of books in a bookstore nook">
+        </div>
+      </div>
+
+      <!-- Panel 3: Resident Cats -->
+      <div class="vibe-grid" id="vibe-panel-cats">
+        <div class="vibe-text">
+          <span class="highlight-badge">The Feline Residents</span>
+          <h3>Purring Reading Companions</h3>
+          <p>What's a cozy nook without a cat? Booktail is home to several friendly, rescue cats who roam the space freely. Whether they are sunbathing on bookshelves, curled up in a corner, or demanding head scratches, our cats bring a unique warmth to the bookstore.</p>
+          <p>We work closely with local shelters to ensure all cats are healthy, happy, and living in an enriched environment that they can call their home.</p>
+          <a href="about.html#cats" class="btn btn-primary btn-sm" id="btn-meet-cats-home"><i class="fa-solid fa-paw"></i> Meet the Cats</a>
+        </div>
+        <div class="vibe-img-container">
+          <img src="images/cat3.jpg" alt="A beautiful calico cat snoozing in a wooden bookshelf nook">
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Statement Section -->
+    <section class="mission" id="mission-section" style="background-color: var(--bg-secondary); border-radius: var(--border-radius-lg); margin-top: 2rem; margin-bottom: 5rem; text-align: center; padding: 5rem 3rem;">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <span class="highlight-badge">Our Mission</span>
+        <h2 class="center-header" style="margin-bottom: 1.5rem;" id="mission-heading">A Haven Amidst the Hustle</h2>
+        <p style="font-size: 1.25rem; font-style: italic; line-height: 1.8; color: var(--color-primary);" id="mission-quote">
+          "Our mission is to provide a slow-paced, nurturing haven for book lovers, cat enthusiasts, and coffee connoisseurs alike. Amidst the fast-paced hustle and bustle of New York City, Booktail stands as a peaceful, green refuge where you can pause, breathe, read, and connect."
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.95rem; color: var(--color-text-light);" id="mission-authors">
+          — Vince & the Booktail Feline Family
+        </p>
+      </div>
+    </section>
+
+    <!-- Star Reviews Carousel Section -->
+    <section class="reviews-carousel-section" id="home-reviews-section">
+      <h2 class="center-header" id="home-reviews-heading">Loved by New Yorkers</h2>
+      <p style="text-align: center; max-width: 600px; margin: 1rem auto 3rem;" id="home-reviews-subheading">
+        Here is what our lovely community has to say about their visits to Booktail.
+      </p>
+
+      <div class="home-reviews-carousel" id="home-reviews-carousel">
+        <button class="carousel-nav-btn prev" id="carousel-prev" aria-label="Previous Review"><i class="fa-solid fa-chevron-left"></i></button>
+        
+        <div class="carousel-track" id="carousel-track">
+          <!-- Slide 1 -->
+          <div class="carousel-slide">
+            <div class="carousel-card">
+              <div class="carousel-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="carousel-quote">"Booktail is absolute magic. Walking across that tiny wooden bridge and seeing the cats sleeping on the shelves immediately washed away all my work stress. The matcha latte was incredible too!"</p>
+              <p class="carousel-author">— Sarah K., West Village</p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <div class="carousel-card">
+              <div class="carousel-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="carousel-quote">"The perfect combo. I sat in a cozy nook for 3 hours reading fantasy and had a fluffy orange cat fall asleep on my lap. Truly the best afternoon in NYC. Recommending this to everyone."</p>
+              <p class="carousel-author">— Marcus L., Brooklyn</p>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <div class="carousel-card">
+              <div class="carousel-stars">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="carousel-quote">"I love that they have manga and sci-fi books alongside the classics. The environment is so peaceful and clean, which is amazing considering there are resident cats. Highly recommended!"</p>
+              <p class="carousel-author">— Yuki T., Queens</p>
+            </div>
+          </div>
+        </div>
+
+        <button class="carousel-nav-btn next" id="carousel-next" aria-label="Next Review"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div class="carousel-indicators" id="carousel-indicators">
+          <span class="carousel-indicator active" data-slide="0"></span>
+          <span class="carousel-indicator" data-slide="1"></span>
+          <span class="carousel-indicator" data-slide="2"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-content" id="footer-sections">
+      <div class="footer-section" id="footer-about">
+        <h3><i class="fa-solid fa-cat"></i> Booktail</h3>
+        <p>NYC's hidden cozy cafe and cat bookstore. An sanctuary for coffee, cats, and stories tucked away in a peaceful alleyway.</p>
+        <div class="social-links" id="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section" id="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reserve.html">Reserve & Menu</a></li>
+          <li><a href="about.html">Meet the Cats</a></li>
+          <li><a href="contact.html">Contact & Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-contact">
+        <h3>Visit Us</h3>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> 14 Cat Alley, Greenwich Village<br>New York, NY 10012</li>
+          <li><i class="fa-solid fa-phone"></i> (212) 555-PAWS</li>
+          <li><i class="fa-solid fa-envelope"></i> hello@booktailnyc.com</li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-hours">
+        <h3>Hours</h3>
+        <ul>
+          <li><strong>Mon - Fri:</strong> 8:00 AM - 8:00 PM</li>
+          <li><strong>Sat - Sun:</strong> 9:00 AM - 9:00 PM</li>
+          <li><small>* Cat Lounge closed Mon morning for vet checkups</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-copyright">
+      <p>&copy; 2026 Booktail NYC. All rights reserved. Handcrafted with love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
