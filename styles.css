@@ -412,7 +412,7 @@ footer {
 }
 
 .hero-content p {
-  color: rgba(244, 240, 230, 0.9);
+  color: var(--color-text);
   font-size: clamp(1.1rem, 2vw, 1.3rem);
   margin-bottom: 2.5rem;
   max-width: 650px;
