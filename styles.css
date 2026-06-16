@@ -5,19 +5,21 @@
 
 :root {
   /* Color Palette */
-  --bg-primary: #FDFBF7;         /* Warm Sand */
-  --bg-secondary: #F6F1E9;       /* Soft Cream / Almond */
-  --color-primary: #1E352F;      /* Deep Forest Green */
-  --color-secondary: #2D5A4F;    /* Moss Green */
-  --accent-gold: #C5A059;        /* Warm Gold */
-  --accent-gold-hover: #AB853E;  /* Darker Gold */
-  --color-stone: #4A524A;        /* Stone Gray */
-  --color-text: #2A2E2B;         /* Dark Slate */
-  --color-text-light: #5F6760;   /* Charcoal Muted Gray */
+  --bg-primary: #0A1210;         /* Extremely dark forest green */
+  --bg-secondary: #121F1C;       /* Dark charcoal forest green */
+  --bg-card: #172B26;            /* Rich dark greenhouse green for cards */
+  --color-primary: #85C0B3;      /* Glowing soft sage/mint green for headers */
+  --color-secondary: #5EA394;    /* Mid-tone bright moss green */
+  --accent-gold: #E5C17B;        /* Glowing warm gold */
+  --accent-gold-hover: #F0D59E;  /* Lighter gold hover */
+  --color-stone: #2F3E3B;        /* Dark Stone Gray */
+  --color-text: #E2E8F0;         /* Soft silver/white text */
+  --color-text-light: #94A3B8;   /* Muted slate gray text */
+  --color-text-dark: #0A1210;    /* Contrast text for light buttons */
   --color-white: #FFFFFF;
-  --color-accent-soft: rgba(197, 160, 89, 0.1);
-  --color-danger: #D9534F;
-  --color-success: #2E7D32;
+  --color-accent-soft: rgba(229, 193, 123, 0.08);
+  --color-danger: #E25C59;
+  --color-success: #52B76E;
 
   /* Fonts */
   --font-heading: 'Playfair Display', Georgia, serif;
@@ -25,12 +27,12 @@
   --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
 
   /* Shadows & Glassmorphism */
-  --glass-bg: rgba(253, 251, 247, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.6);
-  --glass-shadow: 0 8px 32px 0 rgba(30, 53, 47, 0.06);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(30, 53, 47, 0.08);
-  --shadow-lg: 0 16px 40px rgba(30, 53, 47, 0.12);
+  --glass-bg: rgba(18, 31, 28, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
 
   /* Layout */
   --max-width: 1200px;
@@ -147,14 +149,14 @@ img {
 
 .btn-primary {
   background-color: var(--color-primary);
-  color: var(--bg-primary);
+  color: var(--color-text-dark);
 }
 
 .btn-primary:hover {
   background-color: var(--color-secondary);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(45, 90, 79, 0.3);
-  color: var(--color-white);
+  box-shadow: 0 4px 15px rgba(94, 163, 148, 0.25);
+  color: var(--color-text-dark);
 }
 
 .btn-secondary {
@@ -165,21 +167,21 @@ img {
 
 .btn-secondary:hover {
   background-color: var(--color-primary);
-  color: var(--bg-primary);
+  color: var(--color-text-dark);
   transform: translateY(-2px);
 }
 
 .btn-gold {
   background-color: var(--accent-gold);
-  color: var(--color-primary);
+  color: var(--color-text-dark);
   font-weight: 600;
 }
 
 .btn-gold:hover {
   background-color: var(--accent-gold-hover);
-  color: var(--color-white);
+  color: var(--color-text-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
+  box-shadow: 0 4px 15px rgba(229, 193, 123, 0.25);
 }
 
 .btn-sm {
@@ -382,7 +384,7 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(30, 53, 47, 0.92) 0%, rgba(30, 53, 47, 0.45) 100%);
+  background: linear-gradient(135deg, rgba(10, 18, 16, 0.93) 0%, rgba(10, 18, 16, 0.55) 100%);
   z-index: 2;
 }
 
@@ -486,8 +488,8 @@ footer {
 }
 
 .reserve-card {
-  background: var(--color-white);
-  border: 1px solid rgba(45, 90, 79, 0.08);
+  background: var(--bg-card);
+  border: 1px solid rgba(94, 163, 148, 0.15);
   border-radius: var(--border-radius-lg);
   padding: 3rem;
   box-shadow: var(--shadow-md);
@@ -514,7 +516,7 @@ footer {
   font-size: 0.95rem;
   color: var(--color-text);
   background-color: var(--bg-primary);
-  border: 1px solid rgba(30, 53, 47, 0.15);
+  border: 1px solid rgba(94, 163, 148, 0.25);
   border-radius: var(--border-radius-sm);
   transition: var(--transition-smooth);
   outline: none;
@@ -595,11 +597,11 @@ textarea.form-control {
 }
 
 .menu-item {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-md);
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(45, 90, 79, 0.05);
+  border: 1px solid rgba(94, 163, 148, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -639,8 +641,8 @@ textarea.form-control {
 
 /* Pre-order Cart sidebar */
 .cart-card {
-  background: var(--color-white);
-  border: 1px solid rgba(45, 90, 79, 0.08);
+  background: var(--bg-card);
+  border: 1px solid rgba(94, 163, 148, 0.15);
   border-radius: var(--border-radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow-md);
@@ -760,11 +762,11 @@ textarea.form-control {
 }
 
 .book-card {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-md);
   padding: 1.8rem;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(45, 90, 79, 0.05);
+  border: 1px solid rgba(94, 163, 148, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -877,7 +879,7 @@ textarea.form-control {
 }
 
 .modal-box {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-lg);
   padding: 3rem;
   max-width: 500px;
@@ -925,11 +927,11 @@ textarea.form-control {
 }
 
 .cat-card {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(45, 90, 79, 0.05);
+  border: 1px solid rgba(94, 163, 148, 0.1);
   transition: var(--transition-smooth);
   display: flex;
   flex-direction: column;
@@ -1023,8 +1025,8 @@ textarea.form-control {
 }
 
 .contact-card {
-  background-color: var(--color-white);
-  border: 1px solid rgba(45, 90, 79, 0.08);
+  background-color: var(--bg-card);
+  border: 1px solid rgba(94, 163, 148, 0.15);
   border-radius: var(--border-radius-lg);
   padding: 3rem;
   box-shadow: var(--shadow-md);
@@ -1117,11 +1119,11 @@ textarea.form-control {
 }
 
 .review-item {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-md);
   padding: 2rem;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(45, 90, 79, 0.05);
+  border: 1px solid rgba(94, 163, 148, 0.1);
   transition: var(--transition-smooth);
 }
 
@@ -1183,12 +1185,12 @@ textarea.form-control {
 }
 
 .carousel-card {
-  background-color: var(--color-white);
+  background-color: var(--bg-card);
   border-radius: var(--border-radius-lg);
   padding: 3rem;
   box-shadow: var(--shadow-md);
   text-align: center;
-  border: 1px solid rgba(45, 90, 79, 0.05);
+  border: 1px solid rgba(94, 163, 148, 0.1);
 }
 
 .carousel-quote {
@@ -1219,8 +1221,8 @@ textarea.form-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: var(--color-white);
-  border: 1px solid rgba(30, 53, 47, 0.1);
+  background: var(--bg-card);
+  border: 1px solid rgba(94, 163, 148, 0.2);
   color: var(--color-primary);
   width: 44px;
   height: 44px;
