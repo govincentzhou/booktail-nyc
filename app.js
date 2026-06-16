@@ -306,6 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const booksGrid = document.getElementById('books-grid-container');
   const bookSearchInput = document.getElementById('book-search-input');
   const bookGenreFilter = document.getElementById('book-genre-filter');
+  const bookStatusFilter = document.getElementById('book-status-filter');
 
   // Hardcoded default book inventory data
   const originalBooks = [
@@ -416,13 +417,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const query = bookSearchInput.value.toLowerCase().trim();
     const genre = bookGenreFilter.value;
+    const status = bookStatusFilter ? bookStatusFilter.value : 'all';
 
     const filtered = books.filter(book => {
       const matchesSearch = book.title.toLowerCase().includes(query) || 
                             book.author.toLowerCase().includes(query);
       const matchesGenre = genre === 'all' || book.genre === genre;
+      const matchesStatus = status === 'all' || book.status === status;
       
-      return matchesSearch && matchesGenre;
+      return matchesSearch && matchesGenre && matchesStatus;
     });
 
     renderBooks(filtered);
@@ -431,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wire up search and filter inputs
   if (bookSearchInput) bookSearchInput.addEventListener('input', filterBooks);
   if (bookGenreFilter) bookGenreFilter.addEventListener('change', filterBooks);
+  if (bookStatusFilter) bookStatusFilter.addEventListener('change', filterBooks);
 
   // Initialize books grid
   if (booksGrid) {
