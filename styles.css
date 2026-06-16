@@ -13,8 +13,8 @@
   --accent-gold: #E5C17B;        /* Glowing warm gold */
   --accent-gold-hover: #F0D59E;  /* Lighter gold hover */
   --color-stone: #2F3E3B;        /* Dark Stone Gray */
-  --color-text: #E2E8F0;         /* Soft silver/white text */
-  --color-text-light: #94A3B8;   /* Muted slate gray text */
+  --color-text: #F4F0E6;         /* Warm Paper / Ivory text */
+  --color-text-light: #B8B2A6;   /* Warm Muted Sand text */
   --color-text-dark: #0A1210;    /* Contrast text for light buttons */
   --color-white: #FFFFFF;
   --color-accent-soft: rgba(229, 193, 123, 0.08);
