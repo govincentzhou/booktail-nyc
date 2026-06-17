@@ -314,52 +314,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Hardcoded default book inventory data (36 titles total, 6 per genre)
   const originalBooks = [
-    // Classics (classic)
+    // Cycle 1
     { id: 'b1', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'classic', status: 'available', shelf: 'A-2', cssClass: 'classic' },
-    { id: 'b2', title: 'Pride and Prejudice', author: 'Jane Austen', genre: 'classic', status: 'available', shelf: 'A-5', cssClass: 'classic' },
-    { id: 'b3', title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'classic', status: 'available', shelf: 'A-1', cssClass: 'classic' },
-    { id: 'b4', title: '1984', author: 'George Orwell', genre: 'classic', status: 'rented', shelf: 'A-4', cssClass: 'classic' },
-    { id: 'b5', title: 'Wuthering Heights', author: 'Emily Brontë', genre: 'classic', status: 'available', shelf: 'A-3', cssClass: 'classic' },
-    { id: 'b6', title: 'The Picture of Dorian Gray', author: 'Oscar Wilde', genre: 'classic', status: 'available', shelf: 'A-6', cssClass: 'classic' },
-
-    // Fantasy (fantasy)
     { id: 'b7', title: 'The Hobbit', author: 'J.R.R. Tolkien', genre: 'fantasy', status: 'available', shelf: 'F-4', cssClass: 'fantasy' },
-    { id: 'b8', title: 'The Name of the Wind', author: 'Patrick Rothfuss', genre: 'fantasy', status: 'rented', shelf: 'F-2', cssClass: 'fantasy' },
-    { id: 'b9', title: 'A Game of Thrones', author: 'George R.R. Martin', genre: 'fantasy', status: 'available', shelf: 'F-1', cssClass: 'fantasy' },
-    { id: 'b10', title: 'The Way of Kings', author: 'Brandon Sanderson', genre: 'fantasy', status: 'available', shelf: 'F-5', cssClass: 'fantasy' },
-    { id: 'b11', title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling', genre: 'fantasy', status: 'available', shelf: 'F-3', cssClass: 'fantasy' },
-    { id: 'b12', title: 'The Ocean at the End of the Lane', author: 'Neil Gaiman', genre: 'fantasy', status: 'available', shelf: 'F-6', cssClass: 'fantasy' },
-
-    // Sci-Fi (scifi)
     { id: 'b13', title: 'Dune', author: 'Frank Herbert', genre: 'scifi', status: 'available', shelf: 'S-1', cssClass: 'scifi' },
-    { id: 'b14', title: 'Neuromancer', author: 'William Gibson', genre: 'scifi', status: 'rented', shelf: 'S-3', cssClass: 'scifi' },
-    { id: 'b15', title: 'Foundation', author: 'Isaac Asimov', genre: 'scifi', status: 'available', shelf: 'S-2', cssClass: 'scifi' },
-    { id: 'b16', title: 'Hyperion', author: 'Dan Simmons', genre: 'scifi', status: 'available', shelf: 'S-5', cssClass: 'scifi' },
-    { id: 'b17', title: 'The Left Hand of Darkness', author: 'Ursula K. Le Guin', genre: 'scifi', status: 'available', shelf: 'S-4', cssClass: 'scifi' },
-    { id: 'b18', title: 'Snow Crash', author: 'Neal Stephenson', genre: 'scifi', status: 'available', shelf: 'S-6', cssClass: 'scifi' },
-
-    // Dramas & Thrillers (drama)
     { id: 'b19', title: 'Murder on the Orient Express', author: 'Agatha Christie', genre: 'drama', status: 'rented', shelf: 'T-1', cssClass: 'thriller' },
-    { id: 'b20', title: 'Gone Girl', author: 'Gillian Flynn', genre: 'drama', status: 'available', shelf: 'T-3', cssClass: 'thriller' },
-    { id: 'b21', title: 'The Girl with the Dragon Tattoo', author: 'Stieg Larsson', genre: 'drama', status: 'available', shelf: 'T-2', cssClass: 'thriller' },
-    { id: 'b22', title: 'The Silent Patient', author: 'Alex Michaelides', genre: 'drama', status: 'available', shelf: 'T-5', cssClass: 'thriller' },
-    { id: 'b23', title: 'Shutter Island', author: 'Dennis Lehane', genre: 'drama', status: 'rented', shelf: 'T-4', cssClass: 'thriller' },
-    { id: 'b24', title: 'Big Little Lies', author: 'Liane Moriarty', genre: 'drama', status: 'available', shelf: 'T-6', cssClass: 'thriller' },
-
-    // Nonfiction (nonfiction)
     { id: 'b25', title: 'Sapiens: A Brief History of Humankind', author: 'Yuval Noah Harari', genre: 'nonfiction', status: 'available', shelf: 'N-3', cssClass: 'nonfiction' },
-    { id: 'b26', title: 'Educated', author: 'Tara Westover', genre: 'nonfiction', status: 'available', shelf: 'N-1', cssClass: 'nonfiction' },
-    { id: 'b27', title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', genre: 'nonfiction', status: 'available', shelf: 'N-2', cssClass: 'nonfiction' },
-    { id: 'b28', title: 'The Immortal Life of Henrietta Lacks', author: 'Rebecca Skloot', genre: 'nonfiction', status: 'rented', shelf: 'N-5', cssClass: 'nonfiction' },
-    { id: 'b29', title: 'Born a Crime', author: 'Trevor Noah', genre: 'nonfiction', status: 'available', shelf: 'N-4', cssClass: 'nonfiction' },
-    { id: 'b30', title: 'Quiet: The Power of Introverts', author: 'Susan Cain', genre: 'nonfiction', status: 'available', shelf: 'N-6', cssClass: 'nonfiction' },
-
-    // Manga (manga)
     { id: 'b31', title: 'Demon Slayer: Kimetsu no Yaiba Vol. 1', author: 'Koyoharu Gotouge', genre: 'manga', status: 'available', shelf: 'M-1', cssClass: 'manga' },
+
+    // Cycle 2
+    { id: 'b2', title: 'Pride and Prejudice', author: 'Jane Austen', genre: 'classic', status: 'available', shelf: 'A-5', cssClass: 'classic' },
+    { id: 'b8', title: 'The Name of the Wind', author: 'Patrick Rothfuss', genre: 'fantasy', status: 'rented', shelf: 'F-2', cssClass: 'fantasy' },
+    { id: 'b14', title: 'Neuromancer', author: 'William Gibson', genre: 'scifi', status: 'rented', shelf: 'S-3', cssClass: 'scifi' },
+    { id: 'b20', title: 'Gone Girl', author: 'Gillian Flynn', genre: 'drama', status: 'available', shelf: 'T-3', cssClass: 'thriller' },
+    { id: 'b26', title: 'Educated', author: 'Tara Westover', genre: 'nonfiction', status: 'available', shelf: 'N-1', cssClass: 'nonfiction' },
     { id: 'b32', title: 'Attack on Titan Vol. 1', author: 'Hajime Isayama', genre: 'manga', status: 'rented', shelf: 'M-4', cssClass: 'manga' },
+
+    // Cycle 3
+    { id: 'b3', title: 'To Kill a Mockingbird', author: 'Harper Lee', genre: 'classic', status: 'available', shelf: 'A-1', cssClass: 'classic' },
+    { id: 'b9', title: 'A Game of Thrones', author: 'George R.R. Martin', genre: 'fantasy', status: 'available', shelf: 'F-1', cssClass: 'fantasy' },
+    { id: 'b15', title: 'Foundation', author: 'Isaac Asimov', genre: 'scifi', status: 'available', shelf: 'S-2', cssClass: 'scifi' },
+    { id: 'b21', title: 'The Girl with the Dragon Tattoo', author: 'Stieg Larsson', genre: 'drama', status: 'available', shelf: 'T-2', cssClass: 'thriller' },
+    { id: 'b27', title: 'Thinking, Fast and Slow', author: 'Daniel Kahneman', genre: 'nonfiction', status: 'available', shelf: 'N-2', cssClass: 'nonfiction' },
     { id: 'b33', title: 'My Hero Academia Vol. 1', author: 'Kohei Horikoshi', genre: 'manga', status: 'available', shelf: 'M-2', cssClass: 'manga' },
+
+    // Cycle 4
+    { id: 'b4', title: '1984', author: 'George Orwell', genre: 'classic', status: 'rented', shelf: 'A-4', cssClass: 'classic' },
+    { id: 'b10', title: 'The Way of Kings', author: 'Brandon Sanderson', genre: 'fantasy', status: 'available', shelf: 'F-5', cssClass: 'fantasy' },
+    { id: 'b16', title: 'Hyperion', author: 'Dan Simmons', genre: 'scifi', status: 'available', shelf: 'S-5', cssClass: 'scifi' },
+    { id: 'b22', title: 'The Silent Patient', author: 'Alex Michaelides', genre: 'drama', status: 'available', shelf: 'T-5', cssClass: 'thriller' },
+    { id: 'b28', title: 'The Immortal Life of Henrietta Lacks', author: 'Rebecca Skloot', genre: 'nonfiction', status: 'rented', shelf: 'N-5', cssClass: 'nonfiction' },
     { id: 'b34', title: 'Jujutsu Kaisen Vol. 1', author: 'Gege Akutami', genre: 'manga', status: 'available', shelf: 'M-5', cssClass: 'manga' },
+
+    // Cycle 5
+    { id: 'b5', title: 'Wuthering Heights', author: 'Emily Brontë', genre: 'classic', status: 'available', shelf: 'A-3', cssClass: 'classic' },
+    { id: 'b11', title: 'Harry Potter and the Sorcerer\'s Stone', author: 'J.K. Rowling', genre: 'fantasy', status: 'available', shelf: 'F-3', cssClass: 'fantasy' },
+    { id: 'b17', title: 'The Left Hand of Darkness', author: 'Ursula K. Le Guin', genre: 'scifi', status: 'available', shelf: 'S-4', cssClass: 'scifi' },
+    { id: 'b23', title: 'Shutter Island', author: 'Dennis Lehane', genre: 'drama', status: 'rented', shelf: 'T-4', cssClass: 'thriller' },
+    { id: 'b29', title: 'Born a Crime', author: 'Trevor Noah', genre: 'nonfiction', status: 'available', shelf: 'N-4', cssClass: 'nonfiction' },
     { id: 'b35', title: 'Death Note Vol. 1', author: 'Tsugumi Ohba', genre: 'manga', status: 'available', shelf: 'M-3', cssClass: 'manga' },
+
+    // Cycle 6
+    { id: 'b6', title: 'The Picture of Dorian Gray', author: 'Oscar Wilde', genre: 'classic', status: 'available', shelf: 'A-6', cssClass: 'classic' },
+    { id: 'b12', title: 'The Ocean at the End of the Lane', author: 'Neil Gaiman', genre: 'fantasy', status: 'available', shelf: 'F-6', cssClass: 'fantasy' },
+    { id: 'b18', title: 'Snow Crash', author: 'Neal Stephenson', genre: 'scifi', status: 'available', shelf: 'S-6', cssClass: 'scifi' },
+    { id: 'b24', title: 'Big Little Lies', author: 'Liane Moriarty', genre: 'drama', status: 'available', shelf: 'T-6', cssClass: 'thriller' },
+    { id: 'b30', title: 'Quiet: The Power of Introverts', author: 'Susan Cain', genre: 'nonfiction', status: 'available', shelf: 'N-6', cssClass: 'nonfiction' },
     { id: 'b36', title: 'Fullmetal Alchemist Vol. 1', author: 'Hiromu Arakawa', genre: 'manga', status: 'rented', shelf: 'M-6', cssClass: 'manga' }
   ];
 
