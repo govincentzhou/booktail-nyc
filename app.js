@@ -181,33 +181,120 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Pre-order Cart System
-  let cart = [];
+  // ==========================================
+  // Unified Cart & Session Helper Functions
+  // ==========================================
+  const getCart = () => {
+    return JSON.parse(localStorage.getItem('booktail_cart')) || [];
+  };
 
+  const saveCart = (cartArray) => {
+    localStorage.setItem('booktail_cart', JSON.stringify(cartArray));
+  };
+
+  const updateNavCartBadge = () => {
+    const badges = document.querySelectorAll('#nav-cart-badge');
+    const currentCart = getCart();
+    const totalCount = currentCart.reduce((acc, item) => acc + item.qty, 0);
+
+    badges.forEach(badge => {
+      if (totalCount > 0) {
+        badge.textContent = totalCount;
+        badge.style.display = 'inline-block';
+      } else {
+        badge.style.display = 'none';
+      }
+    });
+  };
+
+  const updateAuthNav = () => {
+    const loginProfileLinks = document.querySelectorAll('#link-login-profile');
+    const loggedInUser = localStorage.getItem('booktail_user');
+
+    loginProfileLinks.forEach(link => {
+      if (loggedInUser) {
+        link.href = 'profile.html';
+        link.innerHTML = '<i class="fa-solid fa-user"></i> Profile';
+      } else {
+        link.href = 'login.html';
+        link.innerHTML = '<i class="fa-solid fa-user"></i> Login';
+      }
+    });
+  };
+
+  const addToCart = (id, name, price, qty = 1, type = 'food', details = {}) => {
+    let currentCart = getCart();
+    const existing = currentCart.find(item => item.id === id);
+
+    if (existing) {
+      if (type === 'food') {
+        existing.qty += qty;
+      } else {
+        // Book or reservation is unique, don't increment qty or show duplicates
+        return;
+      }
+    } else {
+      currentCart.push({ id, name, price: parseFloat(price), qty, type, details });
+    }
+
+    saveCart(currentCart);
+    updateNavCartBadge();
+    updateCartUI(); // Updates sidebar on reserve.html if present
+  };
+
+  const removeFromCart = (id) => {
+    let currentCart = getCart();
+    const item = currentCart.find(i => i.id === id);
+    if (!item) return;
+
+    if (item.type === 'food' && item.qty > 1) {
+      item.qty -= 1;
+    } else {
+      currentCart = currentCart.filter(i => i.id !== id);
+    }
+
+    saveCart(currentCart);
+    updateNavCartBadge();
+    updateCartUI();
+    if (document.getElementById('checkout-cart-items-list')) {
+      updateCheckoutPageUI();
+    }
+  };
+
+  // Pre-order Cart System Sidebar Rendering (Reserve Page)
   const updateCartUI = () => {
     if (!cartItemsList) return;
 
     cartItemsList.innerHTML = '';
     let total = 0;
-    let itemCount = 0;
+    const currentCart = getCart();
 
-    if (cart.length === 0) {
+    if (currentCart.length === 0) {
       cartItemsList.innerHTML = '<li class="cart-empty-msg">Your pre-order cart is empty.</li>';
       if (checkoutBtn) checkoutBtn.disabled = true;
     } else {
-      cart.forEach(item => {
-        const itemTotal = item.price * item.qty;
+      currentCart.forEach(item => {
+        const itemTotal = item.type === 'food' ? (item.price * item.qty) : 0;
         total += itemTotal;
-        itemCount += item.qty;
 
         const li = document.createElement('li');
         li.className = 'cart-item';
+        
+        let typeBadge = '';
+        if (item.type === 'book') {
+          typeBadge = '<span class="item-badge book" style="font-size: 0.6rem; padding: 0.1rem 0.3rem; margin-top: 0.2rem; display: inline-block;">Book</span>';
+        } else if (item.type === 'reservation') {
+          typeBadge = '<span class="item-badge booking" style="font-size: 0.6rem; padding: 0.1rem 0.3rem; margin-top: 0.2rem; display: inline-block;">Reserve</span>';
+        } else {
+          typeBadge = `<span style="font-size: 0.75rem; color: var(--color-text-light);">Qty: ${item.qty}</span>`;
+        }
+
         li.innerHTML = `
           <div class="cart-item-info">
             <span class="cart-item-name">${item.name}</span>
-            <div class="cart-item-qty">Qty: ${item.qty}</div>
+            <div>${typeBadge}</div>
           </div>
-          <span class="cart-item-price">$${itemTotal.toFixed(2)}</span>
+          <span class="cart-item-price">${item.type === 'food' ? `$${itemTotal.toFixed(2)}` : 'Included'}</span>
           <button class="cart-remove-btn" data-id="${item.id}" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
         `;
         cartItemsList.appendChild(li);
@@ -216,8 +303,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (checkoutBtn) checkoutBtn.disabled = false;
     }
 
-    if (cartCountBadge) cartCountBadge.textContent = itemCount;
-    if (cartTotalPrice) cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+    if (cartCountBadge) {
+      cartCountBadge.textContent = currentCart.reduce((sum, i) => sum + i.qty, 0);
+    }
+    if (cartTotalPrice) {
+      cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+    }
 
     // Add removal listeners
     const removeButtons = cartItemsList.querySelectorAll('.cart-remove-btn');
@@ -228,30 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  const addToCart = (id, name, price) => {
-    const parsedPrice = parseFloat(price);
-    const existingItem = cart.find(item => item.id === id);
-
-    if (existingItem) {
-      existingItem.qty += 1;
-    } else {
-      cart.push({ id, name, price: parsedPrice, qty: 1 });
-    }
-    updateCartUI();
-  };
-
-  const removeFromCart = (id) => {
-    const existingItem = cart.find(item => item.id === id);
-    if (!existingItem) return;
-
-    if (existingItem.qty > 1) {
-      existingItem.qty -= 1;
-    } else {
-      cart = cart.filter(item => item.id !== id);
-    }
-    updateCartUI();
-  };
-
   // Wire up Menu Add-to-cart buttons
   const menuAddBtns = document.querySelectorAll('.add-to-cart-btn');
   menuAddBtns.forEach(btn => {
@@ -259,7 +326,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = btn.dataset.id;
       const name = btn.dataset.name;
       const price = btn.dataset.price;
-      addToCart(id, name, price);
+      addToCart(id, name, price, 1, 'food');
       
       // Visual feedback: briefly change button text
       const originalText = btn.innerHTML;
@@ -274,23 +341,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Checkout pre-order cart
+  // Checkout pre-order cart redirects to checkout
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
-      if (cart.length === 0) return;
-
-      const itemsStr = cart.map(item => `${item.name} (x${item.qty})`).join(', ');
-      const totalText = cartTotalPrice ? cartTotalPrice.textContent : '';
-      
-      showModal(
-        'Pre-Order Placed!',
-        `Your pre-order for [${itemsStr}] totaling ${totalText} has been registered. We will serve it fresh when you check in for your reservation!`,
-        '<i class="fa-solid fa-cookie-bite"></i>'
-      );
-      
-      // Clear Cart
-      cart = [];
-      updateCartUI();
+      const currentCart = getCart();
+      if (currentCart.length === 0) return;
+      window.location.href = 'cart.html';
     });
   }
 
@@ -312,8 +368,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let booksShowLimit = 8;
   let showAllBooks = false;
 
-  // Hardcoded default book inventory data (36 titles total, 6 per genre)
-  const originalBooks = [
+  // Hardcoded default book inventory data (36 titles total, 6 per genre, interleaved)
+  const defaultBooks = [
     // Cycle 1
     { id: 'b1', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'classic', status: 'available', shelf: 'A-2', cssClass: 'classic' },
     { id: 'b7', title: 'The Hobbit', author: 'J.R.R. Tolkien', genre: 'fantasy', status: 'available', shelf: 'F-4', cssClass: 'fantasy' },
@@ -363,8 +419,16 @@ document.addEventListener('DOMContentLoaded', () => {
     { id: 'b36', title: 'Fullmetal Alchemist Vol. 1', author: 'Hiromu Arakawa', genre: 'manga', status: 'rented', shelf: 'M-6', cssClass: 'manga' }
   ];
 
-  // Make a working copy that we can modify status on
-  let books = [...originalBooks];
+  const getBooks = () => {
+    const stored = localStorage.getItem('booktail_books');
+    if (!stored) {
+      localStorage.setItem('booktail_books', JSON.stringify(defaultBooks));
+      return defaultBooks;
+    }
+    return JSON.parse(stored);
+  };
+
+  let books = getBooks();
 
   const getGenreLabel = (genre) => {
     switch (genre) {
@@ -392,15 +456,31 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const currentCart = getCart();
+
     filteredBooks.forEach(book => {
       const card = document.createElement('div');
       card.className = `book-card ${book.cssClass}`;
       
-      const statusLabel = book.status === 'available' ? 'Available' : 'Rented Out';
-      const statusClass = book.status === 'available' ? 'available' : 'rented';
-      const actionButton = book.status === 'available' 
-        ? `<button class="btn btn-primary btn-sm reserve-book-btn" data-id="${book.id}">Reserve Rental</button>`
-        : `<button class="btn btn-secondary btn-sm" disabled style="cursor: not-allowed; opacity: 0.6;">Rented Out</button>`;
+      const isBookInCart = currentCart.some(item => item.id === book.id && item.type === 'book');
+      
+      let statusLabel = '';
+      let statusClass = '';
+      let actionButton = '';
+
+      if (book.status === 'rented') {
+        statusLabel = 'Rented Out';
+        statusClass = 'rented';
+        actionButton = `<button class="btn btn-secondary btn-sm" disabled style="cursor: not-allowed; opacity: 0.6;">Rented Out</button>`;
+      } else if (isBookInCart) {
+        statusLabel = 'In Cart';
+        statusClass = 'available';
+        actionButton = `<a href="cart.html" class="btn btn-gold btn-sm"><i class="fa-solid fa-cart-shopping"></i> In Cart</a>`;
+      } else {
+        statusLabel = 'Available';
+        statusClass = 'available';
+        actionButton = `<button class="btn btn-primary btn-sm reserve-book-btn" data-id="${book.id}">Reserve Rental</button>`;
+      }
 
       card.innerHTML = `
         <div>
@@ -437,17 +517,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const book = books.find(b => b.id === bookId);
     if (!book || book.status !== 'available') return;
 
-    // Simulate reservation
-    book.status = 'rented';
+    // Add to cart
+    addToCart(book.id, book.title, 0, 1, 'book', { author: book.author, shelf: book.shelf });
     
-    // Refresh display
-    filterBooks();
-    
-    showModal(
-      'Book Reserved!',
-      `"${book.title}" has been reserved for your pickup. Settle at the check-out counter when you arrive. We will hold it for 48 hours.`,
-      '<i class="fa-solid fa-book-bookmark"></i>'
-    );
+    // Redirect to checkout
+    window.location.href = 'cart.html';
   };
 
   const filterBooks = () => {
@@ -466,12 +540,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return matchesSearch && matchesGenre && matchesStatus;
     });
 
-    // Check if we are doing a default search (All genres, empty search, All status)
-    const isDefaultFilter = query === '' && genre === 'all' && status === 'all';
-    
     let booksToRender = filtered;
     
-    if (isDefaultFilter && !showAllBooks) {
+    if (filtered.length > booksShowLimit && !showAllBooks) {
       booksToRender = filtered.slice(0, booksShowLimit);
       if (loadMoreContainer) loadMoreContainer.style.display = 'block';
     } else {
@@ -533,17 +604,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const guests = document.getElementById('reserve-guests').value;
       const catLounge = document.getElementById('reserve-cats').checked;
 
-      const loungeMsg = catLounge 
-        ? "including priority access to cuddle and play in the Feline Lounge" 
-        : "standard bookstore seating";
+      const guestsNum = parseInt(guests) || 1;
+      const resId = 'res-' + Date.now();
+      
+      const resItemDetails = {
+        name: name,
+        email: document.getElementById('reserve-email').value,
+        date: date,
+        time: timeLabel,
+        guests: guestsNum,
+        catLounge: catLounge,
+        notes: document.getElementById('reserve-notes').value || ''
+      };
 
-      showModal(
-        'Reservation Successful!',
-        `Thank you, ${name}! Your table for ${guests} guest(s) on ${date} during the ${timeLabel} slot (${loungeMsg}) has been reserved. Check in at the counter on arrival.`,
-        '<i class="fa-solid fa-calendar-check"></i>'
-      );
+      addToCart(resId, 'Table Reservation', 0, 1, 'reservation', resItemDetails);
 
-      reservationForm.reset();
+      // Redirect to cart
+      window.location.href = 'cart.html';
     });
   }
 
@@ -739,5 +816,612 @@ document.addEventListener('DOMContentLoaded', () => {
   if (reviewsFeed) {
     renderReviews();
   }
+
+
+  // ==========================================
+  // 9. Login & Registration Engine (Login Page)
+  // ==========================================
+  const getUsers = () => {
+    const stored = localStorage.getItem('booktail_users');
+    if (!stored) {
+      const defaultUsers = [
+        { name: 'Vincent Zhou', email: 'vince@booktail.com', password: 'password123', badge: 'VIP Feline Lover' }
+      ];
+      localStorage.setItem('booktail_users', JSON.stringify(defaultUsers));
+      return defaultUsers;
+    }
+    return JSON.parse(stored);
+  };
+
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  const authErrorMsg = document.getElementById('auth-error-message');
+  const tabBtnLogin = document.getElementById('tab-btn-login');
+  const tabBtnSignup = document.getElementById('tab-btn-signup');
+  const loginPanel = document.getElementById('login-panel');
+  const signupPanel = document.getElementById('signup-panel');
+
+  const showAuthError = (message) => {
+    if (authErrorMsg) {
+      authErrorMsg.textContent = message;
+      authErrorMsg.style.display = 'block';
+    }
+  };
+
+  // Switch between Login and Signup panels
+  if (tabBtnLogin && tabBtnSignup && loginPanel && signupPanel) {
+    tabBtnLogin.addEventListener('click', () => {
+      tabBtnLogin.style.borderBottomColor = 'var(--accent-gold)';
+      tabBtnLogin.style.color = 'var(--color-text)';
+      tabBtnSignup.style.borderBottomColor = 'transparent';
+      tabBtnSignup.style.color = 'var(--color-text-light)';
+      loginPanel.style.display = 'block';
+      signupPanel.style.display = 'none';
+      if (authErrorMsg) authErrorMsg.style.display = 'none';
+    });
+
+    tabBtnSignup.addEventListener('click', () => {
+      tabBtnSignup.style.borderBottomColor = 'var(--accent-gold)';
+      tabBtnSignup.style.color = 'var(--color-text)';
+      tabBtnLogin.style.borderBottomColor = 'transparent';
+      tabBtnLogin.style.color = 'var(--color-text-light)';
+      loginPanel.style.display = 'none';
+      signupPanel.style.display = 'block';
+      if (authErrorMsg) authErrorMsg.style.display = 'none';
+    });
+  }
+
+  // Login Form Submission
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (authErrorMsg) authErrorMsg.style.display = 'none';
+
+      const email = document.getElementById('login-email').value.trim().toLowerCase();
+      const password = document.getElementById('login-password').value;
+
+      const usersList = getUsers();
+      const user = usersList.find(u => u.email === email);
+
+      if (user && user.password === password) {
+        localStorage.setItem('booktail_user', JSON.stringify({
+          name: user.name,
+          email: user.email,
+          badge: user.badge
+        }));
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectPage = urlParams.get('redirect');
+        if (redirectPage) {
+          window.location.href = redirectPage;
+        } else {
+          window.location.href = 'profile.html';
+        }
+      } else {
+        showAuthError('Invalid email address or password. Please try again.');
+      }
+    });
+  }
+
+  // Signup Form Submission
+  if (signupForm) {
+    signupForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (authErrorMsg) authErrorMsg.style.display = 'none';
+
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim().toLowerCase();
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+      if (password !== confirmPassword) {
+        showAuthError('Passwords do not match. Please verify your password entry.');
+        return;
+      }
+
+      const usersList = getUsers();
+      const emailExists = usersList.some(u => u.email === email);
+
+      if (emailExists) {
+        showAuthError('Email address is already registered. Please log in instead.');
+        return;
+      }
+
+      const newUser = {
+        name,
+        email,
+        password,
+        badge: 'New Member'
+      };
+
+      usersList.push(newUser);
+      localStorage.setItem('booktail_users', JSON.stringify(usersList));
+
+      localStorage.setItem('booktail_user', JSON.stringify({
+        name: newUser.name,
+        email: newUser.email,
+        badge: newUser.badge
+      }));
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectPage = urlParams.get('redirect');
+      if (redirectPage) {
+        window.location.href = redirectPage;
+      } else {
+        window.location.href = 'profile.html';
+      }
+    });
+  }
+
+
+  // ==========================================
+  // 10. Profile Dashboard Controls (Profile Page)
+  // ==========================================
+  const profileUserName = document.getElementById('profile-user-name');
+  const profileUserEmail = document.getElementById('profile-user-email');
+  const profileUserBadge = document.getElementById('profile-user-badge');
+  const profileOrdersList = document.getElementById('profile-orders-list');
+  const profileEmptyState = document.getElementById('profile-orders-empty-state');
+  const btnLogout = document.getElementById('btn-logout');
+
+  // Verify page authentication
+  const checkProfileAuth = () => {
+    const profileMain = document.getElementById('profile-main');
+    if (!profileMain) return;
+
+    const loggedInUser = localStorage.getItem('booktail_user');
+    if (!loggedInUser) {
+      window.location.href = 'login.html';
+    }
+  };
+
+  // Render User Info and Order History
+  const renderProfileDetails = () => {
+    const loggedInUserStr = localStorage.getItem('booktail_user');
+    if (!loggedInUserStr) return;
+
+    const user = JSON.parse(loggedInUserStr);
+
+    if (profileUserName) profileUserName.textContent = user.name;
+    if (profileUserEmail) profileUserEmail.textContent = user.email;
+    if (profileUserBadge) profileUserBadge.textContent = user.badge;
+
+    // Load Order history
+    const userOrdersKey = `booktail_orders_${user.email}`;
+    const orders = JSON.parse(localStorage.getItem(userOrdersKey)) || [];
+
+    if (!profileOrdersList) return;
+    profileOrdersList.innerHTML = '';
+
+    if (orders.length === 0) {
+      if (profileEmptyState) profileEmptyState.style.display = 'block';
+    } else {
+      if (profileEmptyState) profileEmptyState.style.display = 'none';
+
+      orders.forEach(order => {
+        const orderCard = document.createElement('div');
+        orderCard.className = 'order-history-item';
+        
+        let itemsHtml = '';
+        order.items.forEach(item => {
+          let desc = '';
+          if (item.type === 'food') {
+            desc = 'Cafe Pre-Order';
+          } else if (item.type === 'book') {
+            desc = `Book Rental | Author: ${item.details.author} | Shelf Location: ${item.details.shelf}`;
+          } else if (item.type === 'reservation') {
+            desc = `Table Reservation | Date: ${item.details.date} | Time Slot: ${item.details.time} | Guests: ${item.details.guests} | Lounge Access: ${item.details.catLounge ? 'Yes' : 'No'}`;
+            if (item.details.notes) {
+              desc += ` | Special Requests: ${item.details.notes}`;
+            }
+          }
+          const priceText = item.type === 'food' ? `$${(item.price * item.qty).toFixed(2)}` : 'Included';
+          
+          itemsHtml += `
+            <tr>
+              <td>
+                <div style="font-weight: 600; color: var(--color-primary);">${item.name}</div>
+                <div style="font-size: 0.75rem; color: var(--color-text-light); margin-top: 0.2rem;">${desc}</div>
+              </td>
+              <td class="cell-qty">${item.qty}</td>
+              <td class="cell-total">${priceText}</td>
+            </tr>
+          `;
+        });
+
+        orderCard.innerHTML = `
+          <div class="order-item-header">
+            <div class="order-item-summary">
+              <div class="order-id-row">
+                <span class="order-id">${order.id}</span>
+                <span class="status-badge confirmed">Confirmed</span>
+              </div>
+              <div class="order-date">Placed on ${order.date}</div>
+              <div class="order-meta-total">Total: <span>$${order.total.toFixed(2)}</span></div>
+            </div>
+            <div class="order-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="order-item-details">
+            <table class="order-details-table">
+              <thead>
+                <tr>
+                  <th>Item Details</th>
+                  <th class="cell-header-qty">Qty</th>
+                  <th class="cell-header-total">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${itemsHtml}
+                <tr>
+                  <td colspan="2" style="text-align: right; font-weight: 500; border-top: 1px solid rgba(255, 255, 255, 0.1);">Subtotal:</td>
+                  <td class="cell-total" style="border-top: 1px solid rgba(255, 255, 255, 0.1);">$${order.subtotal.toFixed(2)}</td>
+                </tr>
+                ${order.donation > 0 ? `
+                <tr>
+                  <td colspan="2" style="text-align: right; font-weight: 500;">Cat Lounge Access:</td>
+                  <td class="cell-total">$${order.donation.toFixed(2)}</td>
+                </tr>
+                ` : ''}
+                <tr>
+                  <td colspan="2" style="text-align: right; font-weight: 500;">Tax (8.875%):</td>
+                  <td class="cell-total">$${order.tax.toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: right; font-weight: bold; color: var(--accent-gold);">Total Paid:</td>
+                  <td class="cell-total" style="font-weight: bold; font-size: 1rem;">$${order.total.toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="margin-top: 1.5rem; font-size: 0.75rem; color: var(--color-text-light); font-style: italic; display: flex; justify-content: space-between; align-items: center;">
+              <span>Payment Method: Card ending in ${order.cardEnding}</span>
+              <span>Status: Paid & Confirmed</span>
+            </div>
+          </div>
+        `;
+        profileOrdersList.appendChild(orderCard);
+      });
+
+      // Expandable accordion order details
+      const headers = profileOrdersList.querySelectorAll('.order-item-header');
+      headers.forEach(header => {
+        header.addEventListener('click', () => {
+          const item = header.closest('.order-history-item');
+          item.classList.toggle('expanded');
+        });
+      });
+    }
+  };
+
+  if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+      localStorage.removeItem('booktail_user');
+      window.location.href = 'index.html';
+    });
+  }
+
+  // Setup Bookstore reset helper
+  const profileDetailsCard = document.getElementById('profile-details-card');
+  if (profileDetailsCard) {
+    const resetBtn = document.createElement('button');
+    resetBtn.className = 'btn btn-secondary btn-sm';
+    resetBtn.id = 'btn-reset-books';
+    resetBtn.style.width = '100%';
+    resetBtn.style.marginTop = '1rem';
+    resetBtn.style.borderColor = 'var(--color-primary)';
+    resetBtn.style.color = 'var(--color-primary)';
+    resetBtn.innerHTML = '<i class="fa-solid fa-rotate-left"></i> Reset Book Inventory';
+    
+    profileDetailsCard.insertBefore(resetBtn, btnLogout);
+
+    resetBtn.addEventListener('click', () => {
+      localStorage.removeItem('booktail_books');
+      showModal(
+        'Inventory Reset!',
+        'Bookstore catalogue status has been reset successfully. All books are now marked as Available.',
+        '<i class="fa-solid fa-rotate-left"></i>'
+      );
+      const closeBtn = document.getElementById('success-modal-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          window.location.reload();
+        }, { once: true });
+      }
+    });
+  }
+
+  // Initialize profile
+  checkProfileAuth();
+  renderProfileDetails();
+
+
+  // ==========================================
+  // 11. Shopping Cart & Checkout Page (Cart Page)
+  // ==========================================
+  const checkoutCartEmptyState = document.getElementById('checkout-cart-empty-state');
+  const checkoutCartItemsList = document.getElementById('checkout-cart-items-list');
+  const checkoutSubtotal = document.getElementById('checkout-subtotal');
+  const checkoutDonationFees = document.getElementById('checkout-donation-fees');
+  const checkoutTax = document.getElementById('checkout-tax');
+  const checkoutTotal = document.getElementById('checkout-total');
+  const checkoutPaymentForm = document.getElementById('checkout-payment-form');
+  const checkoutLoginWarning = document.getElementById('checkout-login-warning');
+  const btnSubmitPayment = document.getElementById('btn-submit-payment');
+
+  const updateCheckoutPageUI = () => {
+    if (!checkoutCartItemsList) return;
+
+    checkoutCartItemsList.innerHTML = '';
+    const currentCart = getCart();
+
+    if (currentCart.length === 0) {
+      if (checkoutCartEmptyState) checkoutCartEmptyState.style.display = 'block';
+      if (btnSubmitPayment) btnSubmitPayment.disabled = true;
+      if (checkoutSubtotal) checkoutSubtotal.textContent = '$0.00';
+      if (checkoutDonationFees) checkoutDonationFees.textContent = '$0.00';
+      if (checkoutTax) checkoutTax.textContent = '$0.00';
+      if (checkoutTotal) checkoutTotal.textContent = '$0.00';
+      return;
+    }
+
+    if (checkoutCartEmptyState) checkoutCartEmptyState.style.display = 'none';
+    if (btnSubmitPayment) btnSubmitPayment.disabled = false;
+
+    let subtotal = 0;
+    let donation = 0;
+
+    currentCart.forEach(item => {
+      const itemSubtotal = item.type === 'food' ? (item.price * item.qty) : 0;
+      subtotal += itemSubtotal;
+
+      if (item.type === 'reservation' && item.details.catLounge) {
+        donation += 5.00 * item.details.guests;
+      }
+
+      const card = document.createElement('li');
+      card.className = 'checkout-item-card';
+
+      let badgeClass = 'food';
+      let badgeText = 'Food';
+      if (item.type === 'book') {
+        badgeClass = 'book';
+        badgeText = 'Book';
+      } else if (item.type === 'reservation') {
+        badgeClass = 'booking';
+        badgeText = 'Reservation';
+      }
+
+      let metadata = '';
+      if (item.type === 'food') {
+        metadata = 'Cafe Menu Pre-Order';
+      } else if (item.type === 'book') {
+        metadata = `by ${item.details.author} | Shelf Location: ${item.details.shelf}`;
+      } else if (item.type === 'reservation') {
+        metadata = `Date: ${item.details.date} | Time: ${item.details.time} | Guests: ${item.details.guests} | Lounge Access: ${item.details.catLounge ? 'Yes' : 'No'}`;
+        if (item.details.notes) {
+          metadata += `<br>Special Requests: ${item.details.notes}`;
+        }
+      }
+
+      let actionSection = '';
+      if (item.type === 'food') {
+        actionSection = `
+          <div class="qty-adjuster">
+            <button class="qty-adjuster-btn qty-minus" data-id="${item.id}">-</button>
+            <span class="qty-adjuster-val">${item.qty}</span>
+            <button class="qty-adjuster-btn qty-plus" data-id="${item.id}">+</button>
+          </div>
+        `;
+      }
+
+      const priceText = item.type === 'food' ? `$${itemSubtotal.toFixed(2)}` : 'Included';
+
+      card.innerHTML = `
+        <div class="checkout-item-info">
+          <div class="checkout-item-title-row">
+            <span class="checkout-item-title">${item.name}</span>
+            <span class="item-badge ${badgeClass}">${badgeText}</span>
+          </div>
+          <p class="checkout-item-meta">${metadata}</p>
+        </div>
+        <div class="checkout-item-actions">
+          ${actionSection}
+          <span class="checkout-item-price">${priceText}</span>
+          <button class="checkout-item-remove" data-id="${item.id}" aria-label="Remove item"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+      `;
+
+      checkoutCartItemsList.appendChild(card);
+    });
+
+    // Wire up adjuster click listeners
+    const plusButtons = checkoutCartItemsList.querySelectorAll('.qty-plus');
+    const minusButtons = checkoutCartItemsList.querySelectorAll('.qty-minus');
+    const removeButtons = checkoutCartItemsList.querySelectorAll('.checkout-item-remove');
+
+    plusButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        addToCart(id, '', 0, 1, 'food');
+        updateCheckoutPageUI();
+      });
+    });
+
+    minusButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        removeFromCart(id);
+        updateCheckoutPageUI();
+      });
+    });
+
+    removeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        let currentCart = getCart();
+        currentCart = currentCart.filter(i => i.id !== id);
+        saveCart(currentCart);
+        updateNavCartBadge();
+        updateCheckoutPageUI();
+      });
+    });
+
+    const tax = subtotal * 0.08875;
+    const total = subtotal + donation + tax;
+
+    if (checkoutSubtotal) checkoutSubtotal.textContent = `$${subtotal.toFixed(2)}`;
+    if (checkoutDonationFees) checkoutDonationFees.textContent = `$${donation.toFixed(2)}`;
+    if (checkoutTax) checkoutTax.textContent = `$${tax.toFixed(2)}`;
+    if (checkoutTotal) checkoutTotal.textContent = `$${total.toFixed(2)}`;
+  };
+
+  const updateCheckoutLoginWarning = () => {
+    if (!checkoutLoginWarning) return;
+    const loggedInUser = localStorage.getItem('booktail_user');
+    if (loggedInUser) {
+      checkoutLoginWarning.style.display = 'none';
+    } else {
+      checkoutLoginWarning.style.display = 'flex';
+    }
+  };
+
+  const cardNumberInput = document.getElementById('card-number');
+  const cardExpiryInput = document.getElementById('card-expiry');
+  const cardCvvInput = document.getElementById('card-cvv');
+
+  if (cardNumberInput) {
+    cardNumberInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      let formatted = '';
+      for (let i = 0; i < value.length; i++) {
+        if (i > 0 && i % 4 === 0) {
+          formatted += ' ';
+        }
+        formatted += value[i];
+      }
+      e.target.value = formatted;
+    });
+  }
+
+  if (cardExpiryInput) {
+    cardExpiryInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/\D/g, '');
+      let formatted = '';
+      if (value.length > 0) {
+        formatted += value.substring(0, 2);
+        if (value.length > 2) {
+          formatted += '/' + value.substring(2, 4);
+        }
+      }
+      e.target.value = formatted;
+    });
+  }
+
+  if (cardCvvInput) {
+    cardCvvInput.addEventListener('input', (e) => {
+      e.target.value = e.target.value.replace(/\D/g, '');
+    });
+  }
+
+  if (checkoutPaymentForm) {
+    checkoutPaymentForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const loggedInUserStr = localStorage.getItem('booktail_user');
+      if (!loggedInUserStr) {
+        showModal(
+          'Authentication Required!',
+          'Please sign in or create an account to process your secure payment and record your reservations.',
+          '<i class="fa-solid fa-user-lock"></i>'
+        );
+        const closeBtn = document.getElementById('success-modal-close-btn');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            window.location.href = 'login.html?redirect=cart.html';
+          }, { once: true });
+        }
+        return;
+      }
+
+      if (cardNumberInput.value.replace(/\s/g, '').length < 16) {
+        alert('Invalid credit card number. Please enter a valid 16-digit card.');
+        return;
+      }
+      if (cardExpiryInput.value.length < 5) {
+        alert('Invalid expiry date. Use MM/YY format.');
+        return;
+      }
+      if (cardCvvInput.value.length < 3) {
+        alert('Invalid CVV. Enter the 3 or 4-digit code.');
+        return;
+      }
+
+      const user = JSON.parse(loggedInUserStr);
+      const cartItems = getCart();
+
+      const orderId = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+      const orderDate = new Date().toISOString().split('T')[0];
+      const subTotalVal = parseFloat(checkoutSubtotal.textContent.replace('$', ''));
+      const donationVal = parseFloat(checkoutDonationFees.textContent.replace('$', ''));
+      const taxVal = parseFloat(checkoutTax.textContent.replace('$', ''));
+      const totalVal = parseFloat(checkoutTotal.textContent.replace('$', ''));
+      
+      const newOrder = {
+        id: orderId,
+        date: orderDate,
+        items: cartItems,
+        subtotal: subTotalVal,
+        donation: donationVal,
+        tax: taxVal,
+        total: totalVal,
+        cardEnding: cardNumberInput.value.slice(-4)
+      };
+
+      const userOrdersKey = `booktail_orders_${user.email}`;
+      const userOrders = JSON.parse(localStorage.getItem(userOrdersKey)) || [];
+      userOrders.unshift(newOrder);
+      localStorage.setItem(userOrdersKey, JSON.stringify(userOrders));
+
+      let localBooks = getBooks();
+      cartItems.forEach(item => {
+        if (item.type === 'book') {
+          const matchingBook = localBooks.find(b => b.id === item.id);
+          if (matchingBook) {
+            matchingBook.status = 'rented';
+          }
+        }
+      });
+      localStorage.setItem('booktail_books', JSON.stringify(localBooks));
+
+      saveCart([]);
+      updateNavCartBadge();
+
+      showModal(
+        'Checkout Complete!',
+        `Thank you, ${user.name}! Your payment of $${totalVal.toFixed(2)} was successful. Your order (${orderId}) has been successfully created and saved to your dashboard order history.`,
+        '<i class="fa-solid fa-circle-check"></i>'
+      );
+
+      const closeBtn = document.getElementById('success-modal-close-btn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          window.location.href = 'profile.html';
+        }, { once: true });
+      }
+    });
+  }
+
+  if (checkoutCartItemsList) {
+    updateCheckoutPageUI();
+    updateCheckoutLoginWarning();
+  }
+
+
+  // ==========================================
+  // 12. General Page Startup Initialization
+  // ==========================================
+  updateNavCartBadge();
+  updateAuthNav();
 
 });
