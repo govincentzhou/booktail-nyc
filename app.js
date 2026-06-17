@@ -523,8 +523,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add to cart
     addToCart(book.id, book.title, 0, 1, 'book', { author: book.author, shelf: book.shelf });
     
-    // Redirect to checkout
-    window.location.href = 'cart.html';
+    // Re-render books grid to reflect "In Cart" status immediately
+    filterBooks();
+
+    // Show confirmation modal
+    showModal(
+      'Book Added to Cart!',
+      `"${book.title}" by ${book.author} has been added to your shopping cart. You can continue browsing or go to your cart to check out.`,
+      '<i class="fa-solid fa-book-bookmark"></i>'
+    );
   };
 
   const filterBooks = () => {
