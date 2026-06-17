@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login & Registration | Booktail NYC</title>
+  <meta name="description" content="Sign in or register for a Booktail account to book reservations, track rentals, pre-order from the menu, and view your order history.">
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header id="main-header">
+    <nav class="navbar" id="main-navbar">
+      <a href="index.html" class="logo" id="nav-logo">
+        <i class="fa-solid fa-cat"></i> Book<span>tail</span>
+      </a>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-menu">
+        <li><a href="index.html" id="link-home">Home</a></li>
+        <li><a href="reserve.html" id="link-reserve">Reserve & Menu</a></li>
+        <li><a href="about.html" id="link-about">Meet the Cats</a></li>
+        <li><a href="contact.html" id="link-contact">Contact & Reviews</a></li>
+        <li>
+          <a href="cart.html" id="link-cart" style="position: relative;">
+            <i class="fa-solid fa-cart-shopping"></i> Cart
+            <span id="nav-cart-badge" style="position: absolute; top: -8px; right: -12px; background: var(--accent-gold); color: var(--color-text-dark); font-size: 0.7rem; font-weight: bold; border-radius: 50%; padding: 2px 6px; display: none;">0</span>
+          </a>
+        </li>
+        <li><a href="login.html" class="active" id="link-login-profile"><i class="fa-solid fa-user"></i> Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="login-main" style="display: flex; align-items: center; justify-content: center; min-height: 70vh; padding: 4rem 2rem;">
+    <div class="contact-card" style="max-width: 450px; width: 100%; padding: 3rem;" id="auth-portal-card">
+      
+      <!-- Authentication Tabs -->
+      <div style="display: flex; border-bottom: 2px solid rgba(255, 255, 255, 0.05); margin-bottom: 2rem;" id="auth-tabs">
+        <button id="tab-btn-login" style="flex: 1; padding: 1rem; background: none; border: none; border-bottom: 2px solid var(--accent-gold); color: var(--color-text); font-family: var(--font-ui); font-weight: bold; cursor: pointer; transition: var(--transition-smooth);">Log In</button>
+        <button id="tab-btn-signup" style="flex: 1; padding: 1rem; background: none; border: none; border-bottom: 2px solid transparent; color: var(--color-text-light); font-family: var(--font-ui); font-weight: bold; cursor: pointer; transition: var(--transition-smooth);">Sign Up</button>
+      </div>
+
+      <!-- Login Form Panel -->
+      <div id="login-panel">
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-control" placeholder="vince@booktail.com" required>
+          </div>
+          
+          <div class="form-group" style="margin-bottom: 2rem;">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="btn-submit-login" style="width: 100%;">
+            <i class="fa-solid fa-right-to-bracket"></i> Sign In
+          </button>
+        </form>
+
+        <!-- Demo Account Hint Box -->
+        <div style="background: rgba(197, 160, 89, 0.08); border: 1px solid rgba(197, 160, 89, 0.2); border-radius: var(--border-radius-sm); padding: 1rem; margin-top: 2rem;" id="demo-hint-box">
+          <span style="font-family: var(--font-ui); font-weight: bold; font-size: 0.8rem; color: var(--accent-gold); display: block; margin-bottom: 0.4rem;">
+            <i class="fa-solid fa-circle-info"></i> Demo Account
+          </span>
+          <p style="font-size: 0.75rem; color: var(--color-text-light); line-height: 1.5; margin-bottom: 0;">
+            Email: <code style="color: var(--color-text); font-weight: bold;">vince@booktail.com</code><br>
+            Password: <code style="color: var(--color-text); font-weight: bold;">password123</code>
+          </p>
+        </div>
+      </div>
+
+      <!-- Signup Form Panel (Hidden by default) -->
+      <div id="signup-panel" style="display: none;">
+        <form id="signup-form">
+          <div class="form-group">
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" class="form-control" placeholder="E.g., Margaret Atwood" required>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-email">Email Address</label>
+            <input type="email" id="signup-email" class="form-control" placeholder="margaret@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 2rem;">
+            <label for="signup-confirm-password">Confirm Password</label>
+            <input type="password" id="signup-confirm-password" class="form-control" placeholder="Confirm password" minlength="6" required>
+          </div>
+
+          <button type="submit" class="btn btn-gold" id="btn-submit-signup" style="width: 100%;">
+            <i class="fa-solid fa-user-plus"></i> Create Account
+          </button>
+        </form>
+      </div>
+
+      <!-- Error feedback block -->
+      <div id="auth-error-message" style="display: none; background: rgba(226, 92, 89, 0.1); border: 1px solid rgba(226, 92, 89, 0.3); color: var(--color-danger); border-radius: var(--border-radius-sm); padding: 0.8rem 1rem; margin-top: 1.5rem; font-size: 0.8rem; font-family: var(--font-ui); text-align: center;">
+        <!-- Error text will go here -->
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-content" id="footer-sections">
+      <div class="footer-section" id="footer-about">
+        <h3><i class="fa-solid fa-cat"></i> Booktail</h3>
+        <p>NYC's hidden cozy cafe and cat bookstore. An sanctuary for coffee, cats, and stories tucked away in a peaceful alleyway.</p>
+        <div class="social-links" id="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section" id="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reserve.html">Reserve & Menu</a></li>
+          <li><a href="about.html">Meet the Cats</a></li>
+          <li><a href="contact.html">Contact & Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-contact">
+        <h3>Visit Us</h3>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> 14 Cat Alley, Greenwich Village<br>New York, NY 10012</li>
+          <li><i class="fa-solid fa-phone"></i> (212) 555-PAWS</li>
+          <li><i class="fa-solid fa-envelope"></i> hello@booktailnyc.com</li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-hours">
+        <h3>Hours</h3>
+        <ul>
+          <li><strong>Mon - Fri:</strong> 8:00 AM - 8:00 PM</li>
+          <li><strong>Sat - Sun:</strong> 9:00 AM - 9:00 PM</li>
+          <li><small>* Cat Lounge closed Mon morning for vet checkups</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-copyright">
+      <p>&copy; 2026 Booktail NYC. All rights reserved. Handcrafted with love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
