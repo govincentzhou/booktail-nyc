@@ -1361,3 +1361,330 @@ textarea.form-control {
     display: none;
   }
 }
+
+/* 10. Unified Shopping Cart, Checkout & User Dashboard Styles */
+
+/* Navigation Cart Badge */
+#nav-cart-badge {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+
+/* Checkout Page Cart List */
+.checkout-cart-list {
+  padding: 0;
+  margin: 0;
+}
+
+.checkout-item-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(94, 163, 148, 0.1);
+  border-radius: var(--border-radius-md);
+  padding: 1.5rem;
+  margin-bottom: 1.2rem;
+  transition: var(--transition-smooth);
+  gap: 1.5rem;
+}
+
+.checkout-item-card:hover {
+  border-color: rgba(94, 163, 148, 0.25);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.checkout-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex-grow: 1;
+}
+
+.checkout-item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.checkout-item-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.item-badge {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.item-badge.food {
+  background-color: rgba(229, 193, 123, 0.1);
+  color: var(--accent-gold);
+}
+
+.item-badge.book {
+  background-color: rgba(94, 163, 148, 0.15);
+  color: var(--color-primary);
+}
+
+.item-badge.booking {
+  background-color: rgba(94, 163, 148, 0.15);
+  color: var(--color-primary);
+  border: 1px solid rgba(94, 163, 148, 0.3);
+}
+
+.checkout-item-meta {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.checkout-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+/* Quantity selector */
+.qty-adjuster {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-primary);
+  border: 1px solid rgba(94, 163, 148, 0.2);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.qty-adjuster-btn {
+  background: none;
+  border: none;
+  color: var(--color-text);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: var(--transition-smooth);
+}
+
+.qty-adjuster-btn:hover {
+  background-color: var(--color-secondary);
+  color: var(--color-text-dark);
+}
+
+.qty-adjuster-val {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: bold;
+  padding: 0 0.5rem;
+  min-width: 25px;
+  text-align: center;
+}
+
+.checkout-item-price {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  min-width: 70px;
+  text-align: right;
+}
+
+.checkout-item-remove {
+  background: none;
+  border: none;
+  color: var(--color-danger);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: var(--transition-smooth);
+  padding: 0.2rem;
+}
+
+.checkout-item-remove:hover {
+  transform: scale(1.2);
+}
+
+/* User Profile Order History Dashboard */
+.order-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.order-history-item {
+  background-color: var(--bg-secondary);
+  border: 1px solid rgba(94, 163, 148, 0.1);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.order-history-item:hover {
+  border-color: rgba(94, 163, 148, 0.25);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: rgba(23, 43, 38, 0.3);
+}
+
+.order-item-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.order-id-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.order-id {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.order-date {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+.order-meta-total {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.order-meta-total span {
+  font-weight: bold;
+  color: var(--accent-gold);
+}
+
+.order-toggle-icon {
+  font-size: 1.2rem;
+  color: var(--color-primary);
+  transition: var(--transition-smooth);
+}
+
+.order-history-item.expanded .order-toggle-icon {
+  transform: rotate(180deg);
+  color: var(--accent-gold);
+}
+
+.order-item-details {
+  display: none;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid rgba(94, 163, 148, 0.15);
+  background-color: rgba(10, 18, 16, 0.5);
+}
+
+.order-history-item.expanded .order-item-details {
+  display: block;
+}
+
+.order-details-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+}
+
+.order-details-table th, 
+.order-details-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+
+.order-details-table th {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.order-details-table td {
+  color: var(--color-text-light);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.order-details-table tr:last-child td {
+  border-bottom: none;
+}
+
+.order-details-table .cell-total {
+  font-weight: bold;
+  color: var(--accent-gold);
+  text-align: right;
+}
+
+.order-details-table .cell-qty {
+  text-align: center;
+}
+
+.order-details-table .cell-header-qty {
+  text-align: center;
+}
+
+.order-details-table .cell-header-total {
+  text-align: right;
+}
+
+.status-badge {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-badge.confirmed {
+  background-color: rgba(82, 183, 110, 0.1);
+  color: var(--color-success);
+  border: 1px solid rgba(82, 183, 110, 0.3);
+}
+
+/* Card Number Input Spacing Helper */
+#card-number, #card-expiry {
+  letter-spacing: 1.5px;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .checkout-item-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  
+  .checkout-item-actions {
+    justify-content: space-between;
+    border-top: 1px dashed rgba(255, 255, 255, 0.05);
+    padding-top: 0.8rem;
+  }
+  
+  .checkout-item-price {
+    text-align: left;
+  }
+}
+
