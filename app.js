@@ -214,11 +214,14 @@ document.addEventListener('DOMContentLoaded', () => {
     loginProfileLinks.forEach(link => {
       if (loggedInUser) {
         link.href = 'profile.html';
-        link.innerHTML = '<i class="fa-solid fa-user"></i> Profile';
+        link.setAttribute('aria-label', 'Profile');
+        link.setAttribute('title', 'Profile');
       } else {
         link.href = 'login.html';
-        link.innerHTML = '<i class="fa-solid fa-user"></i> Login';
+        link.setAttribute('aria-label', 'Login');
+        link.setAttribute('title', 'Login');
       }
+      link.innerHTML = '<i class="fa-solid fa-user"></i>';
     });
   };
 

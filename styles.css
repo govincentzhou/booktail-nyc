@@ -267,6 +267,33 @@ header {
   font-weight: 600;
 }
 
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-left: auto;
+}
+
+.nav-actions a {
+  color: var(--color-text);
+  font-size: 1.2rem;
+  position: relative;
+  transition: var(--transition-smooth);
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-actions a:hover {
+  color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.nav-actions a.active {
+  color: var(--color-primary);
+}
+
 .menu-toggle {
   display: none;
   background: none;
@@ -1308,6 +1335,11 @@ textarea.form-control {
 }
 
 @media (max-width: 768px) {
+  .nav-actions {
+    margin-left: auto;
+    margin-right: 1.5rem;
+  }
+  
   .nav-links {
     position: fixed;
     top: 75px;
