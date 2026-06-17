@@ -629,8 +629,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
       addToCart(resId, 'Table Reservation', 0, 1, 'reservation', resItemDetails);
 
-      // Redirect to cart
-      window.location.href = 'cart.html';
+      // Reset the reservation form
+      reservationForm.reset();
+
+      // Show confirmation modal
+      showModal(
+        'Reservation Added to Cart!',
+        `Thank you, ${name}! Your table for ${guestsNum} guest(s) on ${date} during the ${timeLabel} slot has been added to your cart. You can continue browsing or go to your cart to check out.`,
+        '<i class="fa-solid fa-calendar-check"></i>'
+      );
     });
   }
 
