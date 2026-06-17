@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile Dashboard | Booktail NYC</title>
+  <meta name="description" content="View your Booktail profile, track your table reservations, check your book rental statuses, and review your past order history.">
+  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header id="main-header">
+    <nav class="navbar" id="main-navbar">
+      <a href="index.html" class="logo" id="nav-logo">
+        <i class="fa-solid fa-cat"></i> Book<span>tail</span>
+      </a>
+      <button class="menu-toggle" id="mobile-menu-toggle" aria-label="Toggle Navigation Menu">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <ul class="nav-links" id="nav-links-menu">
+        <li><a href="index.html" id="link-home">Home</a></li>
+        <li><a href="reserve.html" id="link-reserve">Reserve & Menu</a></li>
+        <li><a href="about.html" id="link-about">Meet the Cats</a></li>
+        <li><a href="contact.html" id="link-contact">Contact & Reviews</a></li>
+        <li>
+          <a href="cart.html" id="link-cart" style="position: relative;">
+            <i class="fa-solid fa-cart-shopping"></i> Cart
+            <span id="nav-cart-badge" style="position: absolute; top: -8px; right: -12px; background: var(--accent-gold); color: var(--color-text-dark); font-size: 0.7rem; font-weight: bold; border-radius: 50%; padding: 2px 6px; display: none;">0</span>
+          </a>
+        </li>
+        <li><a href="profile.html" class="active" id="link-login-profile"><i class="fa-solid fa-user"></i> Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="profile-main" style="padding: 4rem 2rem;">
+    <section class="profile-section" id="profile-layout-container" style="max-width: var(--max-width); margin: 0 auto;">
+      
+      <div class="contact-layout" id="profile-grid">
+        
+        <!-- User Info Details (Left Column) -->
+        <div class="profile-info-column" id="profile-details-wrapper">
+          <div class="contact-card" style="padding: 3rem; text-align: center;" id="profile-details-card">
+            
+            <!-- User Avatar Icon -->
+            <div style="width: 100px; height: 100px; border-radius: 50%; background-color: var(--bg-secondary); border: 2px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 3rem; color: var(--accent-gold);" id="profile-avatar">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            
+            <h3 id="profile-user-name" style="margin-bottom: 0.2rem;">Vincent Zhou</h3>
+            <span class="highlight-badge" style="font-size: 0.75rem;" id="profile-user-badge">VIP Feline Lover</span>
+            
+            <div style="margin: 2rem 0; text-align: left; border-top: 1px dashed rgba(255, 255, 255, 0.1); padding-top: 2rem;" id="profile-metadata">
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; font-family: var(--font-ui);">
+                <span style="color: var(--color-text-light);">Email:</span>
+                <span id="profile-user-email" style="font-weight: 500; color: var(--color-text);">vince@booktail.com</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.8rem; font-family: var(--font-ui);">
+                <span style="color: var(--color-text-light);">Joined:</span>
+                <span style="font-weight: 500; color: var(--color-text);">June 2026</span>
+              </div>
+            </div>
+
+            <button class="btn btn-secondary btn-sm" id="btn-logout" style="width: 100%; border-color: var(--color-danger); color: var(--color-danger);">
+              <i class="fa-solid fa-right-from-bracket"></i> Log Out
+            </button>
+
+          </div>
+        </div>
+
+        <!-- Past Order History (Right Column) -->
+        <div class="profile-orders-column" id="profile-history-wrapper">
+          <div class="contact-card" style="padding: 3rem;" id="profile-history-card">
+            <h3>Your Order History</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 2.5rem;">Review details of your past table reservations, book rentals, and food orders.</p>
+            
+            <div id="profile-orders-empty-state" style="display: none; text-align: center; padding: 4rem 2rem;">
+              <div style="font-size: 4rem; color: var(--color-text-light); opacity: 0.3; margin-bottom: 1.5rem;"><i class="fa-solid fa-folder-open"></i></div>
+              <h4>No orders yet!</h4>
+              <p style="font-size: 0.9rem; margin-top: 0.5rem; margin-bottom: 2rem;">When you complete a checkout, your bookings and receipts will show up here.</p>
+              <a href="reserve.html" class="btn btn-gold btn-sm"><i class="fa-solid fa-calendar-days"></i> Make a Booking</a>
+            </div>
+
+            <div class="profile-orders-list" id="profile-orders-list">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-content" id="footer-sections">
+      <div class="footer-section" id="footer-about">
+        <h3><i class="fa-solid fa-cat"></i> Booktail</h3>
+        <p>NYC's hidden cozy cafe and cat bookstore. An sanctuary for coffee, cats, and stories tucked away in a peaceful alleyway.</p>
+        <div class="social-links" id="footer-socials">
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a>
+        </div>
+      </div>
+      <div class="footer-section" id="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="reserve.html">Reserve & Menu</a></li>
+          <li><a href="about.html">Meet the Cats</a></li>
+          <li><a href="contact.html">Contact & Reviews</a></li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-contact">
+        <h3>Visit Us</h3>
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> 14 Cat Alley, Greenwich Village<br>New York, NY 10012</li>
+          <li><i class="fa-solid fa-phone"></i> (212) 555-PAWS</li>
+          <li><i class="fa-solid fa-envelope"></i> hello@booktailnyc.com</li>
+        </ul>
+      </div>
+      <div class="footer-section" id="footer-hours">
+        <h3>Hours</h3>
+        <ul>
+          <li><strong>Mon - Fri:</strong> 8:00 AM - 8:00 PM</li>
+          <li><strong>Sat - Sun:</strong> 9:00 AM - 9:00 PM</li>
+          <li><small>* Cat Lounge closed Mon morning for vet checkups</small></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom" id="footer-copyright">
+      <p>&copy; 2026 Booktail NYC. All rights reserved. Handcrafted with love.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
